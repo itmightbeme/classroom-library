@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name="users")
 @DiscriminatorColumn(name="dtype")
 public abstract class User {
 
