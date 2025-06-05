@@ -1,0 +1,8 @@
+<!-- templates/fragments/messages.html -->
+<div th:fragment="messages">
+    <div th:if="${#fields.hasErrors()}">
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+    </div>
+</div>

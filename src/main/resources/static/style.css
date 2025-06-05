@@ -44,18 +44,51 @@
     --success: var(--asparagus);
     --warning: var(--gamboge);
     --error: var(--coral);
+    --student-background: var(--ltmoss);
+    --student-dark: var(--asparagus);
+    --teacher-background: var(--lt-blue);
+    --teacher-dark: var(--vista-blue)
+
 }
 
 /* ===============================
    📄 TYPOGRAPHY
    Base font styles and headings
 ================================== */
-body {
+html, body {
     font-family: 'Segoe UI', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: var(--text);
-    padding-top: 80px;
+    padding-top: 30px;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Footer base style */
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto;
+    border-top: 1px solid var(--lapis-lazuli); /* optional divider */
+}
+
+/* Theme-specific overrides */
+body.student .footer {
+    background-color: var(--student-background);  /*update when I know what color I want student/teacher pages*/
+    color: var(--student-dark);
+}
+
+body.teacher .footer {
+    background-color: var(--teacher-background); /*update when I know what color I want student/teacher pages*/
+    color: var(--teacher-dark);
 }
 
 /* ===============================
@@ -68,14 +101,7 @@ body {
     padding: 2rem;
 }
 
-/* ===============================
-   🧭 NAVIGATION
-   Top bar, sidebar, role-based menus
-================================== */
-/*.navbar { ... }*/
-/*.nav-teacher { ... }*/
-/*.nav-student { ... }*/
-
+/* ===============   🧭 NAVIGATION   ========================== */
 .top-nav {
     background-color: var(--puce);
     position: fixed;
@@ -109,7 +135,7 @@ body {
     color: var(--text);
     font-weight: bold;
 }
-/* Add an active class to highlight the current page */
+/* Add an active class to highlight the current page ------needs more code  */
 .top-nav a.active {
     background-color: var(--puce);
     color: white;
@@ -154,6 +180,14 @@ body {
 ================================== */
 /*.teacher-dashboard { ... }*/
 /*.student-dashboard { ... }*/
+
+.student {
+    background-color: var(--student-background);
+}
+
+.teacher {
+    background-color: var(--teacher-background);
+}
 
 
 
