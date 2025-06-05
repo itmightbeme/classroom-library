@@ -1,0 +1,60 @@
+package com.trafny.classroomlibrary.Entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+@Entity
+@DiscriminatorValue("STUDENT")
+public class Student extends User{
+
+     @NotBlank
+     @Column(unique = true, nullable = false)
+     private String studentId;
+
+     @NotBlank(message = "PIN is required.")
+     @Pattern(regexp = "\\d{4}", message = "PIN must be exactly 4 digits")
+     @Column(nullable = false)
+     private String pin;
+
+     @Min(0)
+     @Max(12)
+     private double readingLevel;
+
+     //Constructor
+
+     public Student() {
+     }
+
+
+     //Getters and Setters
+
+
+     public String getStudentId() {
+          return studentId;
+     }
+
+     public void setStudentId(String studentId) {
+          this.studentId = studentId;
+     }
+
+     public String getPin() {
+          return pin;
+     }
+
+     public void setPin(String pin) {
+          this.pin = pin;
+     }
+
+     public double getReadingLevel() {
+          return readingLevel;
+     }
+
+     public void setReadingLevel(double readingLevel) {
+          this.readingLevel = readingLevel;
+     }
+}
