@@ -1,0 +1,167 @@
+/* ===============================
+   🔁 RESET & BASE: Normalize styles across browsers
+================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===============================
+   🎨 COLOR VARIABLES
+================================== */
+:root {
+    /* 🔵 Blues */
+    --berkeley-blue: #052f5f;
+    --lt-blue: #b4c9e1;
+    --lapis-lazuli: #426996;
+    --vista-blue: #7ea3cc;
+
+    /* 🔴 Reds & Pinks */
+    --coral: #c73437;
+    --light-coral: #ef767a;
+    --lt-pink: #f6aeb1;
+    --puce: #b78da3;
+    --darkpuce: #884A6BFF;
+
+    /* 🟢 Greens */
+    --moss: #849141;
+    --ltmoss: #bdc885;
+    --asparagus: #60992d;
+
+    /* 🟡 Accents & Yellows */
+    --gamboge: #f1a208;
+    --ltyellow: #faca6a;
+
+    /* ========== Semantic Mapping ========== */
+    --primary: var(--berkeley-blue);
+    --primary-light: var(--lt-blue);
+    --accent: var(--lapis-lazuli);
+    --background: #ffffff;
+    --surface: var(--vista-blue);
+    --text: #333333;
+    --text-muted: #666666;
+    --success: var(--asparagus);
+    --warning: var(--gamboge);
+    --error: var(--coral);
+}
+
+/* ===============================
+   📄 TYPOGRAPHY
+   Base font styles and headings
+================================== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text);
+    padding-top: 80px;
+}
+
+/* ===============================
+   📦 LAYOUT
+   Grid/flex utility classes, wrappers
+================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ===============================
+   🧭 NAVIGATION
+   Top bar, sidebar, role-based menus
+================================== */
+/*.navbar { ... }*/
+/*.nav-teacher { ... }*/
+/*.nav-student { ... }*/
+
+.top-nav {
+    background-color: var(--puce);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    /*padding: 4px;*/
+    overflow: hidden;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* optional */
+
+
+}
+/* Style the links inside the navigation bar */
+.top-nav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+/* Change the color of links on hover */
+.top-nav a:hover {
+    background-color: var(--moss);
+    color: var(--text);
+    font-weight: bold;
+}
+/* Add an active class to highlight the current page */
+.top-nav a.active {
+    background-color: var(--puce);
+    color: white;
+}
+/* Hide the link that should open and close the top nav on small screens */
+.top-nav .icon {
+    display: none;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.logo {
+    height: 60px;
+}
+.app-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--berkeley-blue);
+}
+.user-info {
+    font-size: 0.9em;
+    color: var(--berkeley-blue);
+    margin-left: auto;
+    margin-top: 4px;
+}
+
+
+
+/* ===============================
+   🧩 COMPONENTS
+   Buttons, cards, alerts
+================================== */
+/*button.primary { ... }*/
+/*.alert-error { ... }*/
+/*.card { ... }*/
+
+/* ===============================
+   🧑‍🏫 PAGES
+   Page-specific tweaks (optional)
+================================== */
+/*.teacher-dashboard { ... }*/
+/*.student-dashboard { ... }*/
+
+
+
+
+
+
+
+
+
+
+

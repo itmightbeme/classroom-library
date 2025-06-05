@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="~{::title}">Student Page</title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="student-page">
+
+<!-- Logo and Nav -->
+<div th:replace="~{fragments/nav-student :: nav}"></div>
+
+<!-- Flash/Error Messages -->
+<div th:replace="~{fragments/messages :: messages}"></div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div th:replace="~{::section}"> <!-- this will be replaced by page-specific content --> </div>
+</div>
+
+<!-- Footer or Scripts (if any) -->
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="nav">
+    <nav class="top-nav">
+        <div class="logo-container">
+            <img th:src="@{/images/logo2.png}" alt="Classroom Library Logo" class="logo" />
+            <span class="app-name">Classroom Library</span>
+        </div>
+
+        <a th:href="@{/teachers/dashboard}">
+<!--           th:classappend="${#httpServletRequest.requestURI == '/teachers/dashboard'} ? ' active'">-->
+            🏠 Dashboard
+        </a>
+        <a th:href="@{/books}">
+<!--           th:classappend="${#httpServletRequest.requestURI == '/books'} ? ' active'">-->
+            📚 Books
+        </a>
+        <a th:href="@{/students}">
+<!--           th:classappend="${#httpServletRequest.requestURI == '/students'} ? ' active'">-->
+            👩‍🏫 Students
+        </a>
+        <a th:href="@{/reports}">
+<!--           th:classappend="${#httpServletRequest.requestURI == '/reports'} ? ' active'">-->
+            📊 Reports
+        </a>
+        <a th:href="@{/logout}">🚪 Logout</a>
+    </nav>
+</div>
+</html>
