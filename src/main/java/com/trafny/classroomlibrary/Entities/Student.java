@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Pattern;
 public class Student extends User{
 
      @NotBlank
+     @Pattern(regexp = "^[A-Z]{2}[0-9]{2}$", message = "Student ID must be 2 uppercase letters followed by 2 digits")
      @Column(unique = true, nullable = false)
      private String studentId;
 
@@ -39,7 +40,7 @@ public class Student extends User{
      }
 
      public void setStudentId(String studentId) {
-          this.studentId = studentId;
+          this.studentId = studentId != null ? studentId.trim().toUpperCase() : null;
      }
 
      public String getPin() {

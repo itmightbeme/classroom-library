@@ -2,6 +2,7 @@ package com.trafny.classroomlibrary.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity public class BookCopy {
 
@@ -12,7 +13,7 @@ import jakarta.validation.constraints.NotBlank;
     @ManyToOne (optional = false)
     private Book book;
 
-    @NotBlank(message = "SimpleID is required.")
+    @Pattern(regexp = "^[A-Z]{2}[0-9]{2}$", message = "Simple ID must be 2 uppercase letters followed by 2 digits")
     @Column(unique = true, nullable = false)
     private String simpleId;
 
@@ -51,7 +52,7 @@ import jakarta.validation.constraints.NotBlank;
     }
 
     public void setSimpleId(String simpleId) {
-        this.simpleId = simpleId;
+        this.simpleId = simpleId != null ? simpleId.trim().toUpperCase() : null;
     }
 
     public boolean isAvailable() {
