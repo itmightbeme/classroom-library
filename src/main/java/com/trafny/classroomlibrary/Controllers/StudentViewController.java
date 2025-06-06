@@ -14,7 +14,7 @@ public class StudentViewController {
         return "students/dashboard";
     }
 
-    @GetMapping("/students/logout")
+    @GetMapping("/sign-out")
     public String logoutStudent(HttpSession session) {
         session.invalidate(); // Clears all session attributes
         return "redirect:/students/login?logout";
