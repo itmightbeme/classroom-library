@@ -2,28 +2,30 @@
 
 <div th:fragment="nav">
 
-  <nav class="top-nav">
-    <div class="logo-container">
-      <img th:src="@{/images/logo2.png}" alt="Classroom Library Logo" class="logo" />
-      <span class="app-name">Classroom Library</span>
-    </div>
+    <nav class="top-nav">
+        <div class="logo-container">
+            <img th:src="@{/images/logo2.png}" alt="Classroom Library Logo" class="logo"/>
+            <span class="app-name">Classroom Library</span>
+        </div>
 
 
-    <a th:href="@{/students/dashboard}">
-<!--       th:classappend="${#httpServletRequest.requestURI == '/students/dashboard'} ? ' active'"-->
+        <a th:href="@{/students/dashboard}">
+            <!--       th:classappend="${#httpServletRequest.requestURI == '/students/dashboard'} ? ' active'"-->
 
-      🏠 Dashboard
-    </a>
-    <a th:href="@{/checkouts/simple}">
-<!--       th:classappend="${#httpServletRequest.requestURI == '/checkouts/simple'} ? ' active'"-->
+            🏠 Dashboard
+        </a>
+        <a th:href="@{/checkouts/simple}">
+            <!--       th:classappend="${#httpServletRequest.requestURI == '/checkouts/simple'} ? ' active'"-->
 
-      🔄 Checkout/Return
-    </a>
-    <a th:href="@{/books/search}">
-<!--       th:classappend="${#httpServletRequest.requestURI == '/books/search'} ? ' active'"-->
+            🔄 Checkout/Return
+        </a>
+        <a th:href="@{/books/search}">
+            <!--       th:classappend="${#httpServletRequest.requestURI == '/books/search'} ? ' active'"-->
 
-      🔍 Search Books
-    </a>
-    <a th:href="@{/logout}">🚪 Logout</a>
-  </nav>
+            🔍 Search Books
+        </a>
+        <a th:href="@{/logout}">🚪 Logout</a>
+        <p th:text="${session.loggedInStudent.name}">Student Name</p>
+    </nav>
+
 </div>

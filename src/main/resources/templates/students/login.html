@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <title>Student Login</title>
+</head>
+
+<body class="student">
+<div class="login">
+    <img class="logo" th:src="@{/images/logo1.png}" alt="Classroom Library Logo"/>
+
+    <h2>Student Login</h2>
+
+    <form th:action="@{/students/login}" method="post">
+        <div>
+            <label for="studentId">StudentId:</label>
+            <input type="text" id="studentId" name="studentId" th:value="${param.studentId}" />
+        </div>
+        <div>
+            <label for="pin">PIN:</label>
+            <input type="password" id="pin" name="pin"/>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+
+        <div th:if="${param.error}">
+            <p style="color: var(--error);">Invalid username or password</p>
+        </div>
+        <div th:if="${param.logout}">
+            <p style="color: var(--success);">You have been logged out</p>
+        </div>
+    </form>
+
+    <div>
+        <a th:href="@{/login}"><button type="button">I am a teacher</button></a>
+    </div>
+</div>
+</body>
+</html>
