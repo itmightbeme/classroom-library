@@ -55,6 +55,11 @@
    📄 TYPOGRAPHY
    Base font styles and headings
 ================================== */
+
+.timestamp {
+    font-size: .7em;
+}
+
 html, body {
     font-family: 'Segoe UI', sans-serif;
     font-size: 16px;

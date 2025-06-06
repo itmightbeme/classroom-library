@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/style.css}">
+
+  <title>Class List</title>
+</head>
+<body class="teacher">
+<header>
+  <!-- Logo and Nav -->
+  <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+<main>
+  <!-- Add Page Title and Content Here!-->
+  <h2>Student List</h2>
+  <p class="timestamp" th:text="${timestamp}">Timestamp here</p>
+
+  <table class="bluetable">
+    <thead>
+    <tr>
+      <th>Student Name</th>
+      <th>Student ID</th>
+      <th>PIN</th>
+      <th>Reading Level</th>
+    </tr>
+    </thead>
+    <tbody>
+<!--    <tr th:each="student : ${students}"-->
+<!--        th:onclick="'window.location.href=\'/teachers/students/detail/' + ${student.id} + '\'"-->
+<!--        style="cursor: pointer;">-->
+    <tr th:each="student : ${students}"
+        onclick="void(0)"
+        style="cursor: pointer;">
+      <td th:text="${student.name}">Name</td>
+      <td th:text="${student.studentId}">ID</td>
+      <td th:text="${student.pin}">PIN</td>
+      <td th:text="${student.readingLevel}">Level</td>
+    </tr>
+     </tbody>
+  </table>
+  <div>
+    <a th:href="@{/teachers/students/add}" class="button btn-primary">&#x271A; Add Student</a>
+  </div>
+
+
+
+
+
+
+
+
+</main>
+<footer>
+  <!-- Footer -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>
