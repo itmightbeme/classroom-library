@@ -24,23 +24,18 @@ public class BookTopicController {
     public String listTopics(Model model) {
         List<Topic> topics = topicRepo.findAll();
         model.addAttribute("topics", topics);
+        model.addAttribute("newTopic", new Topic());
         return "books/topics/list";
     }
 
-    @GetMapping("/books/topics/new")
-    public String showNewTopicForm(Model model) {
-        model.addAttribute("topic", new Topic());
-        return "books/topics/new";
-    }
-
     @PostMapping("/books/topics")
-    public String createTopic(@ModelAttribute Topic topic, RedirectAttributes ra) {
-        topicRepo.save(topic);
+    public String createTopic(@ModelAttribute Topic newTopic, RedirectAttributes ra) {
+        topicRepo.save(newTopic);
         ra.addFlashAttribute("message", "Topic added successfully.");
         return "redirect:/books/topics/list";
     }
 
-    @PostMapping("/books/topics/delete/{id}") //note: This function still needs to be added to UI page.
+    @PostMapping("/books/topics/delete/{id}") //note: DELETE  function still needs to be added to UI page.
     public String deleteTopic(@PathVariable Long id, RedirectAttributes ra) {
         topicRepo.deleteById(id);
         ra.addFlashAttribute("message", "Topic deleted.");

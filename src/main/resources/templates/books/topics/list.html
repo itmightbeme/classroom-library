@@ -41,7 +41,17 @@
     <div>
 
         <!-- Add Topic -->
-        <a th:href="@{/books/topics/new}" class="btn-primary">&#x271A; Add Topic</a>
+        <button class="btn-primary" onclick="document.getElementById('add-topic-form').style.display='block'; this.style.display='none';">
+            &#x271A; Add Topic
+        </button>
+
+        <div id="add-topic-form" style="display: none; margin-top: 1em;">
+            <form th:action="@{/books/topics}" th:object="${newTopic}" method="post">
+                <input type="text" th:field="*{name}" placeholder="Enter new topic name" required />
+<!--                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+                <button type="submit" class="btn-primary">&#x271A; Add</button>
+            </form>
+        </div>
 
         <!-- Delete ::: Add delete function note: controller has been added -->
 
