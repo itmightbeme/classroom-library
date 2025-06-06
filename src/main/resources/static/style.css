@@ -214,9 +214,77 @@ body.teacher .footer {
     color: white;
 }
 
+ /*===============   FORM CONTAINER   ========================== */
+.form-field {
+    background-color: var(--ltyellow);
+    padding: 1.5em;
+    border-radius: 8px;
+    max-width: 600px;
+    margin-top: 1em;
+}
 
+/* Input and select fields */
+form input[type="text"],
+form input[type="number"],
+form input[type="password"],
+form select {
+    width: 100%;
+    padding: 10px 14px;
+    margin: 0.5em 0 1em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
 
+/* Submit button */
+input[type="submit"],
+.button.submit {
+    width: 100%;
+    background-color: var(--moss);
+    color: white;
+    padding: 12px 18px;
+    margin-top: 0.5em;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+}
 
+input[type="submit"]:hover,
+.button.submit:hover {
+    background-color: var(--asparagus); /* Slightly darker moss for hover */
+}
+
+/* Error message styling */
+.error {
+    color: #b30000;
+    font-size: 0.9em;
+    margin-top: -0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Optional: Form label styling */
+label {
+    display: block;
+    margin-top: 0.5em;
+    font-weight: bold;
+}
+
+.button.danger {
+    background-color: var(--lt-pink);
+    border: 1px solid var(--coral);
+    color: #800000;
+    font-weight: bold;
+    padding: 0.4em 0.8em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.button.danger:hover {
+    background-color: var(--light-coral);
+}
 
 /* ===============================
    🧩 COMPONENTS
