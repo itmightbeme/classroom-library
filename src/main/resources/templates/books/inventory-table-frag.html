@@ -1,0 +1,36 @@
+<!-- templates/books/inventory-table.html -->
+<div th:fragment="bookInventoryTable(copies)">
+    <table class="bluetable">
+        <thead>
+        <tr>
+            <th>Copy ID</th>
+            <th>Simple ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genres</th>
+            <th>Reading Level</th>
+            <th>Available</th>
+            <th>Location</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="copy : ${copies}"
+            th:onclick="|window.location.href='/books/detail/${copy.book.id}'|"
+            style="cursor: pointer;">
+            <td th:text="${copy.id}">No.</td>
+            <td th:text="${copy.simpleId}">SimpleID</td>
+            <td th:text="${copy.book.title}">Title</td>
+            <td th:text="${copy.book.author}">Author</td>
+            <td>
+                <ul class="inner-table-list">
+                    <li th:each="genre : ${copy.book.genres}" th:text="${genre.name}">Genre</li>
+                </ul>
+            </td>
+            <td th:text="${copy.book.readingLevel}">0.0</td>
+            <td th:text="${copy.available ? '✅' : '❌'}">✅</td>
+            <td th:text="${copy.location}">Location</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

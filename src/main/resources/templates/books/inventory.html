@@ -1,10 +1,36 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <link rel="stylesheet" th:href="@{/style.css}">
 
+    <title>Inventory</title>
+</head>
+<body class="teacher">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+<main>
+    <!-- Add Page Title and Content Here!-->
+    <h2>Book Inventory</h2>
+    <div class="floating-button" >
+        <a href="/books/add" class="btn-primary">&#x271A; Add Book</a>
+    </div>
+    <div style="margin-top: 30px;" >
+    <div th:replace="books/inventory-table-frag :: bookInventoryTable(${copies})"></div>
+    </div>
+
+
+
+
+
+
+</main>
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
 </body>
 </html>

@@ -82,17 +82,17 @@ main {
     text-align: center;
     padding: 10px 0;
     margin-top: auto;
-    border-top: 1px solid var(--lapis-lazuli); /* optional divider */
+    border-top: 1px solid var(--lapis-lazuli); /*  divider */
 }
 
 /* Theme-specific overrides */
 body.student .footer {
-    background-color: var(--student-background);  /*update when I know what color I want student/teacher pages*/
+    background-color: var(--student-background);
     color: var(--student-dark);
 }
 
 body.teacher .footer {
-    background-color: var(--teacher-background); /*update when I know what color I want student/teacher pages*/
+    background-color: var(--teacher-background);
     color: var(--teacher-dark);
 }
 
@@ -214,6 +214,14 @@ body.teacher .footer {
     color: white;
 }
 
+.inner-table-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.9em;
+}
+
+
+
  /*===============   FORM CONTAINER   ========================== */
 .form-field {
     background-color: var(--ltyellow);
@@ -259,7 +267,7 @@ input[type="submit"]:hover,
 
 /* Error message styling */
 .error {
-    color: #b30000;
+    color: var(--error);
     font-size: 0.9em;
     margin-top: -0.5em;
     margin-bottom: 0.5em;
@@ -290,6 +298,15 @@ label {
    🧩 COMPONENTS
    Buttons, cards, alerts
 ================================== */
+
+.floating-button {
+    position: absolute;
+    top: 80px; /* adjust depending on your navbar height */
+    right: 20px;
+    z-index: 10;
+}
+
+
 
 .btn-primary {
     display: inline-block;
@@ -336,7 +353,7 @@ label {
     margin: 60px auto;
     padding: 2rem;
     background-color: #f9f9fc;
-    border: 1px solid #c3d9ff;
+    border: 1px solid var(--ltblue);
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -350,7 +367,7 @@ label {
 }
 
 .login h2 {
-    color: #1f3c88;
+    color: var(--berkeley-blue);
     margin-bottom: 1.5rem;
 }
 
@@ -371,7 +388,7 @@ label {
 }
 
 .login button {
-    background-color: #1f3c88;
+    background-color: var(--berkeley-blue);
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
@@ -382,18 +399,18 @@ label {
 }
 
 .login button:hover {
-    background-color: #3657b1;
+    background-color: var(--lapis-lazuli);
 }
 
 .login a button {
     background-color: #e0e7ff;
-    color: #1f3c88;
-    border: 1px solid #1f3c88;
+    color: var(--lapis-lazuli);
+    border: 1px solid var(--berkeley-blue);
     margin-top: 1rem;
 }
 
 .login a button:hover {
-    background-color: #c3d9ff;
+    background-color: var(--ltblue);
 }
 
 

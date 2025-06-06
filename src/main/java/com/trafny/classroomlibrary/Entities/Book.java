@@ -23,8 +23,6 @@ public class Book {
     @Size(max=100)
     private String author;
 
-    private String genre;
-
     @ManyToMany
     @JoinTable(name="book_genres", joinColumns = @JoinColumn(name="book_id"),inverseJoinColumns = @JoinColumn(name="genre_id"))
     private Set<Genre> genres = new HashSet<>();
@@ -76,14 +74,6 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author != null ? author.trim() : null;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public Set<Genre> getGenres() {
