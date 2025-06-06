@@ -1,0 +1,13 @@
+package com.trafny.classroomlibrary.Controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class LoginController {
+
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login"; // This assumes your login.html is in src/main/resources/templates/
+    }
+}
