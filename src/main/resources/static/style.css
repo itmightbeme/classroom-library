@@ -33,7 +33,7 @@
     --gamboge: #f1a208;
     --ltyellow: #faca6a;
 
-    /* ========== Semantic Mapping ========== */
+    /* ============= Semantic Mapping ================ */
     --primary: var(--berkeley-blue);
     --primary-light: var(--ltblue);
     --accent: var(--lapis-lazuli);
@@ -51,7 +51,7 @@
 
 }
 
-/* ===============================
+/* =====================================
    📄 TYPOGRAPHY
    Base font styles and headings
 ================================== */
@@ -101,7 +101,7 @@ body.teacher .footer {
     padding: 2rem;
 }
 
-/* ===============   🧭 NAVIGATION   ========================== */
+/* =====================   🧭 NAVIGATION   ========================== */
 .top-nav {
     background-color: var(--puce);
     position: fixed;
@@ -163,6 +163,24 @@ body.teacher .footer {
     margin-left: auto;
     margin-top: 4px;
 }
+.nav-link-button {
+    background: none;
+    border: none;
+    text-decoration: none;
+    font-size: 17px;
+    color: black;
+    font: inherit;
+    cursor: pointer;
+    padding: 14px 16px;
+
+}
+
+.nav-link-button:hover {
+    background-color: var(--moss);
+    color: var(--text);
+    font-weight: bold;
+}
+
 
 
 

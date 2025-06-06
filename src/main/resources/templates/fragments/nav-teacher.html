@@ -6,6 +6,10 @@
             <img th:src="@{/images/logo2.png}" alt="Classroom Library Logo" class="logo" />
             <span class="app-name">Classroom Library</span>
         </div>
+        <div>
+            <p style="font-size: .7em">Current User:</p>
+            <p><span th:text="${#authentication.name}">Teacher</span></p>
+        </div>
 
         <a th:href="@{/teachers/dashboard}">
 <!--           th:classappend="${#httpServletRequest.requestURI == '/teachers/dashboard'} ? ' active'">-->
@@ -23,7 +27,10 @@
 <!--           th:classappend="${#httpServletRequest.requestURI == '/reports'} ? ' active'">-->
             📊 Reports
         </a>
-        <a th:href="@{/logout}">🚪 Logout</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="nav-link-button">
+                🚪 Logout</button>
+        </form>
     </nav>
 </div>
 
