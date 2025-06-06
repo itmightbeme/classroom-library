@@ -3,7 +3,7 @@ CREATE TABLE genre (
                        name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE book_topic (
+CREATE TABLE topic (
                             id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                             name VARCHAR(255) NOT NULL
 );
@@ -26,9 +26,9 @@ CREATE TABLE book_genres (
 
 CREATE TABLE book_topics (
                              book_id BIGINT NOT NULL,
-                             book_topic_id BIGINT NOT NULL,
+                             topic_id BIGINT NOT NULL,
                              FOREIGN KEY (book_id) REFERENCES book(id),
-                             FOREIGN KEY (book_topic_id) REFERENCES book_topic(id)
+                             FOREIGN KEY (topic_id) REFERENCES topic(id)
 );
 
 CREATE TABLE book_copy (

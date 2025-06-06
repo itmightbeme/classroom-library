@@ -13,7 +13,7 @@
 :root {
     /* 🔵 Blues */
     --berkeley-blue: #052f5f;
-    --lt-blue: #b4c9e1;
+    --ltblue: #b4c9e1;
     --lapis-lazuli: #426996;
     --vista-blue: #7ea3cc;
 
@@ -35,7 +35,7 @@
 
     /* ========== Semantic Mapping ========== */
     --primary: var(--berkeley-blue);
-    --primary-light: var(--lt-blue);
+    --primary-light: var(--ltblue);
     --accent: var(--lapis-lazuli);
     --background: #ffffff;
     --surface: var(--vista-blue);
@@ -46,7 +46,7 @@
     --error: var(--coral);
     --student-background: var(--ltmoss);
     --student-dark: var(--asparagus);
-    --teacher-background: var(--lt-blue);
+    --teacher-background: var(--ltblue);
     --teacher-dark: var(--vista-blue)
 
 }
@@ -166,10 +166,59 @@ body.teacher .footer {
 
 
 
+/* ===============   Tables   ========================== */
+.bluetable {
+
+    border-collapse: collapse;
+    background-color: white;
+    width: 100%;
+}
+
+.bluetable td, .bluetable th {
+    border: 1px solid var(--ltblue);
+    padding: 8px;
+}
+
+.bluetable tr:nth-child(even){background-color: var(--vista-blue);}
+
+.bluetable tr:hover {background-color: var(--ltblue);}
+
+.bluetable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--berkeley-blue);
+    color: white;
+}
+
+
+
+
+
 /* ===============================
    🧩 COMPONENTS
    Buttons, cards, alerts
 ================================== */
+
+.btn-primary {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 16px;
+    background-color: var(--berkeley-blue); /* matches table header */
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: var(--ltblue);  /* matches row hover color */
+    color: black;
+}
+
+
+
 /*button.primary { ... }*/
 /*.alert-error { ... }*/
 /*.card { ... }*/

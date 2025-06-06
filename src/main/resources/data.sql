@@ -10,7 +10,7 @@ INSERT INTO genre (name) VALUES
                              ('Graphic Novels'),
                              ('Poetry');
 
-INSERT INTO book_topic (name) VALUES
+INSERT INTO topic (name) VALUES
                                   ('Animals'),
                                   ('Dystopia'),
                                   ('Friendship'),
@@ -46,7 +46,7 @@ INSERT INTO book_genres (book_id, genre_id) VALUES
                                                 (9, 8),
                                                 (10, 8);
 
-INSERT INTO book_topics (book_id, book_topic_id) VALUES
+INSERT INTO book_topics (book_id, topic_id) VALUES
                                                      (1, 1), (1, 3),
                                                      (2, 2),
                                                      (3, 4),

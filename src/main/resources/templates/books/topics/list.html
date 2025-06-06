@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <title>Topics List</title>
+</head>
+<body class="teacher">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+<main>
+    <!-- Add Page Title and Content Here!-->
+    <h2> Topics List</h2>
+
+    <div th:fragment="topicList(topics)">
+        <table class="bluetable">
+            <thead>
+            <tr>
+                <th>Topic ID</th>
+                <th>Topic Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="topic : ${topics}"
+                onclick="void(0)"
+                style="cursor: pointer;">
+                <td th:text="${topic.id}">No</td>
+                <td th:text="${topic.name}">Topic</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- code to replace onclick void when ready:::  th:onclick="'window.location.href=\'/reports/topic/' + ${topic.id} + '\'"-->
+
+
+    <!--    Buttons to add and delete topics ::: add security back in once it's set up-->
+<!--        <div th:if="${#authentication?.principal?.authorities.?contains('ROLE_TEACHER')}">-->
+    <div>
+
+        <!-- Add Topic -->
+        <a th:href="@{/books/topics/new}" class="btn-primary">&#x271A; Add Topic</a>
+
+        <!-- Delete ::: Add delete function note: controller has been added -->
+
+
+    </div>
+
+
+</main>
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+
+</body>
+</html>
