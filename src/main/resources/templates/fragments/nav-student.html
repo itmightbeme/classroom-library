@@ -24,7 +24,9 @@
 
             🔍 Search Books
         </a>
-        <a th:href="@{/logout}">🚪 Logout</a>
+        <a th:href="@{/students/logout}">🚪 Logout</a>
+
+
         <p th:text="${session.loggedInStudent.name}">Student Name</p>
     </nav>
 
