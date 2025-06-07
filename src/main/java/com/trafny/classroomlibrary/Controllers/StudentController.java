@@ -47,18 +47,67 @@ public class StudentController {
         model.addAttribute("student", student);
         return "teachers/students/detail";
     }
+    @PostMapping("/add")
+    public String addStudent(
+            @Valid @ModelAttribute("student") Student student,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes redirectAttributes
+    ) {
+        if (studentRepo.findByStudentId(student.getStudentId()).isPresent()) {
+            bindingResult.rejectValue("studentId", "error.student", "Student ID must be unique.");
+        }
 
-    @PostMapping("/detail")
-    public String saveStudent(@Valid @ModelAttribute("student") Student student,
-                              BindingResult result,
-                              Model model) {
-        if (result.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "teachers/students/detail";
         }
 
         studentRepo.save(student);
+        redirectAttributes.addFlashAttribute("successMessage", "Student added successfully.");
         return "redirect:/teachers/students/list";
     }
+
+    @PostMapping("/edit/{id}")
+    public String updateStudent(
+            @PathVariable("id") Long id,
+            @Valid @ModelAttribute("student") Student student,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes redirectAttributes
+    ) {
+        Student dbStudent = studentRepo.findById(id).orElse(null);
+        if (dbStudent == null) {
+            bindingResult.reject("student", "Student not found.");
+            return "teachers/students/detail";
+        }
+
+        // If submitted ID doesn't match original, reject
+        if (!dbStudent.getStudentId().equals(student.getStudentId())) {
+            bindingResult.rejectValue("studentId", "error.student", "Student ID cannot be changed.");
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "teachers/students/detail";
+        }
+
+        dbStudent.setName(student.getName());
+        dbStudent.setPin(student.getPin());
+        dbStudent.setReadingLevel(student.getReadingLevel());
+        studentRepo.save(dbStudent);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Student updated successfully.");
+        return "redirect:/teachers/students/list";
+    }
+
+
+
+
+
+
+
+
+
+
 
     // Delete student (used on detail page)
     @PostMapping("/delete/{id}")

@@ -19,7 +19,8 @@
 <main>
     <h2 th:text="${student.id != null} ? 'Edit Student' : 'Add Student'">Student</h2>
 
-    <form th:action="@{/teachers/students/detail}" th:object="${student}" method="post">
+    <form th:action="${student.id == null} ? @{/teachers/students/add} : @{/teachers/students/edit/{id}(id=${student.id})}"
+          th:object="${student}" method="post">
 
         <div>
             <label for="name">Full Name:</label>
@@ -29,7 +30,8 @@
 
         <div>
             <label for="studentId">Student ID:</label>
-            <input type="text" th:field="*{studentId}" id="studentId" required />
+            <input type="text" th:field="*{studentId}" id="studentId"
+                   th:attr="readonly=${student.id != null}" required />
             <div class="error" th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></div>
         </div>
 
