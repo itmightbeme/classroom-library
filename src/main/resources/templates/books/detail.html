@@ -1,10 +1,31 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <link rel="stylesheet" th:href="@{/style.css}">
 
+    <title>Book Detail</title>
+</head>
+<body class="teacher">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+<main>
+    <!-- Add Page Title and Content Here!-->
+    <h2> Book Detail</h2>
+    <p th:text="${book.title}">Book Title</p>
+
+    <div th:replace="~{books/book-info-frag :: bookForm}"></div>
+
+
+
+
+</main>
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
 </body>
 </html>

@@ -338,6 +338,8 @@ label {
 /*.teacher-dashboard { ... }*/
 /*.student-dashboard { ... }*/
 
+
+
 .student {
     background-color: var(--student-background);
 }
@@ -345,6 +347,27 @@ label {
 .teacher {
     background-color: var(--teacher-background);
 }
+
+
+.book-cover-container {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.book-cover-image {
+    height: 50vh;
+    width: auto;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: auto;
+}
+
+
+
+
 
 
 /* ==================   Tables   ========================== */

@@ -1,0 +1,56 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="bookForm">
+    <form th:action="${book.id != null} ? @{'/books/' + ${book.id}} : @{/books}"
+          th:object="${book}" method="post">
+
+        <div style="display: flex; align-items: flex-start; gap: 2rem;">
+
+            <!-- Left: Form fields -->
+            <div style="flex: 1;">
+
+                <!-- Title -->
+                <label>Title:</label>
+                <input type="text" th:field="*{title}" th:readonly="${readonlyMode}" required />
+                <div class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+
+                <!-- Author -->
+                <label>Author:</label>
+                <input type="text" th:field="*{author}" th:readonly="${readonlyMode}" required />
+                <div class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+
+                <!-- ISBN -->
+                <label>ISBN:</label>
+                <input type="text" th:field="*{isbn}" th:readonly="${readonlyMode}" />
+                <div class="error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></div>
+
+                <!-- Reading Level -->
+                <label>Reading Level:</label>
+                <input type="number" step="0.1" min="0" max="12" th:field="*{readingLevel}" th:readonly="${readonlyMode}" />
+                <div class="error" th:if="${#fields.hasErrors('readingLevel')}" th:errors="*{readingLevel}"></div>
+
+                <!-- Description -->
+                <label>Description:</label><br>
+                <textarea th:field="*{description}" th:readonly="${readonlyMode}" rows="6" cols="50"></textarea>
+                <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+            </div>
+
+            <!-- Right: Book Cover -->
+            <div class="book-cover-container">
+                <img src="/images/bookcoverholder.png" alt="Book Cover" class="book-cover-image" />
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <div th:if="${readonlyMode == null or !readonlyMode}">
+            <button type="submit" class="button submit">Save Book</button>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+
+

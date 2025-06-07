@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         <tr th:each="copy : ${copies}"
-            th:onclick="|window.location.href='/books/detail/${copy.book.id}'|"
+            th:attr="onclick=|window.location.href='/books/detail/' + '${copy.book.id}'|"
             style="cursor: pointer;">
             <td th:text="${copy.id}">No.</td>
             <td th:text="${copy.simpleId}">SimpleID</td>
