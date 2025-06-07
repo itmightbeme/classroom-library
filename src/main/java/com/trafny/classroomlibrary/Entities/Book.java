@@ -17,10 +17,12 @@ public class Book {
 
     @NotBlank(message = "Title is required.")
     @Size(max=100)
+    @Column(nullable = false)
     private String title;
 
     @NotBlank(message = "Author is required.")
     @Size(max=100)
+    @Column(nullable = false)
     private String author;
 
     @ManyToMany

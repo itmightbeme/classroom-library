@@ -14,7 +14,8 @@ public class BookCopy {
     @ManyToOne (optional = false)
     private Book book;
 
-    @Pattern(regexp = "^[A-Z]{2}[0-9]{2}$", message = "Simple ID must be 2 uppercase letters followed by 2 digits")
+    @NotBlank(message = "SimpleID is required.")
+    @Pattern(regexp = "^[A-Z]{2}[0-9]{2}$", message = "SimpleID must be 2 uppercase letters followed by 2 digits")
     @Column(unique = true, nullable = false)
     private String simpleId;
 

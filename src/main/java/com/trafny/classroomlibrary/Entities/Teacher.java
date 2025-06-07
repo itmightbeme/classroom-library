@@ -13,6 +13,7 @@ public class Teacher extends User {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @NotBlank(message = "Password is required.")
     @Column(nullable = false)
     private String password;
 
