@@ -47,25 +47,47 @@ public class StudentController {
         model.addAttribute("student", student);
         return "teachers/students/detail";
     }
-    @PostMapping("/add")
-    public String addStudent(
-            @Valid @ModelAttribute("student") Student student,
-            BindingResult bindingResult,
-            Model model,
-            RedirectAttributes redirectAttributes
-    ) {
-        if (studentRepo.findByStudentId(student.getStudentId()).isPresent()) {
-            bindingResult.rejectValue("studentId", "error.student", "Student ID must be unique.");
-        }
+//    @PostMapping("/add")
+//    public String addStudent(
+//            @Valid @ModelAttribute("student") Student student,
+//            BindingResult bindingResult,
+//            Model model,
+//            RedirectAttributes redirectAttributes
+//    ) {
+//        if (studentRepo.findByStudentId(student.getStudentId()).isPresent()) {
+//            bindingResult.rejectValue("studentId", "error.student", "Student ID must be unique.");
+//        }
+//
+//        if (bindingResult.hasErrors()) {
+//            return "teachers/students/detail";
+//        }
+//
+//        studentRepo.save(student);
+//        redirectAttributes.addFlashAttribute("successMessage", "Student added successfully.");
+//        return "redirect:/teachers/students/list";
+//    }
+@PostMapping("/add")
+public String addStudent(
+        @Valid @ModelAttribute("student") Student student,
+        BindingResult bindingResult,
+        Model model,
+        RedirectAttributes redirectAttributes
+) {
+    Optional<Student> existing = studentRepo.findByStudentId(student.getStudentId());
 
-        if (bindingResult.hasErrors()) {
-            return "teachers/students/detail";
-        }
-
-        studentRepo.save(student);
-        redirectAttributes.addFlashAttribute("successMessage", "Student added successfully.");
-        return "redirect:/teachers/students/list";
+    if (existing.isPresent() && !existing.get().getId().equals(student.getId())) {
+        bindingResult.rejectValue("studentId", "error.student", "Student ID must be unique.");
     }
+
+    if (bindingResult.hasErrors()) {
+        return "teachers/students/detail";
+    }
+
+    studentRepo.save(student);
+    redirectAttributes.addFlashAttribute("successMessage", "Student added successfully.");
+    return "redirect:/teachers/students/list";
+}
+
 
     @PostMapping("/edit/{id}")
     public String updateStudent(

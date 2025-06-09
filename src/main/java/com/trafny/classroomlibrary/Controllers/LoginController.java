@@ -40,6 +40,12 @@ public class LoginController {
                                       HttpSession session) {
 
         Optional<Student> studentOpt = studentRepo.findByStudentIdAndPin(studentId, pin);
+// for debugging only
+        System.out.println("Login attempt: " + studentId + " / " + pin);
+        studentRepo.findAll().forEach(s -> {
+            System.out.println(s.getStudentId() + " / " + s.getPin());
+        });
+
         if (studentOpt.isPresent()) {
             session.setAttribute("loggedInStudent", studentOpt.get());
             return "redirect:/students/dashboard"; // or student dashboard
