@@ -15,6 +15,10 @@
 <!--           th:classappend="${#httpServletRequest.requestURI == '/teachers/dashboard'} ? ' active'">-->
             🏠 Dashboard
         </a>
+        <a th:href="@{/teachers/account}">
+            <!--           th:classappend="${#httpServletRequest.requestURI == '/teachers/dashboard'} ? ' active'">-->
+            👤 Account
+        </a>
         <a th:href="@{/books/inventory}">
 <!--           th:classappend="${#httpServletRequest.requestURI == '/books'} ? ' active'">-->
             📚 Books

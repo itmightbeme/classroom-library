@@ -1,0 +1,10 @@
+<div th:fragment="teacherList(teachers)">
+
+  <h2>All Teachers</h2>
+  <ul>
+    <li th:each="teacher : ${teachers}" th:text="${teacher.name}">Teacher Name</li>
+  </ul>
+
+
+  <a href="/teachers/new-teacher-form" class="btn-primary">&#x271A; Add New Teacher</a>
+</div>

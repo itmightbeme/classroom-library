@@ -235,6 +235,7 @@ body.teacher .footer {
 form input[type="text"],
 form input[type="number"],
 form input[type="password"],
+form input[type="email"],
 form select {
     width: 100%;
     padding: 10px 14px;
@@ -365,7 +366,29 @@ label {
     margin: auto;
 }
 
+/*Accomodate list of of teachers on account page*/
+.right-section {
+    position: fixed;
+    top: 70px; /* adjust if you have a fixed header/nav */
+    right: 0;
+    width: 250px; /* or any desired width */
+    height: calc(100vh - 70px); /* full height minus top nav */
+    background-color: var(--teacher-background); /* or any bg */
+    padding: 1rem;
+    overflow-y: auto;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
 
+}
+.right-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.left-section {
+    margin-right: 260px; /* equal or greater than .right-section width */
+}
 
 
 
