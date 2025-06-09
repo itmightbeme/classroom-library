@@ -468,6 +468,70 @@ label {
 
 
 
+/*CARD STYLING*/
+* {
+    box-sizing: border-box;
+}
+
+/* Individual card column */
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    flex: 0 1 calc(25% - 20px); /* Four cards per row with spacing */
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    min-width: 200px; /* Prevents squishing too small */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.card p {
+    font-size: 2em;
+    margin: 0;
+}
+
+/* Stack vertically on small screens */
+@media screen and (max-width: 768px) {
+    .card {
+        flex: 1 1 100%;
+    }
+}
+
+
+/*Alternate Styling for cards*/
+/*.card-row {*/
+/*    display: flex;*/
+/*    gap: 1rem;*/
+/*    flex-wrap: wrap;*/
+/*    margin-bottom: 1.5rem;*/
+/*}*/
+
+/*.card {*/
+/*    flex: 1 1 200px;*/
+/*    background-color: var(--ltyellow);*/
+/*    padding: 1.25rem;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 2px 5px rgba(0,0,0,0.1);*/
+/*    text-align: center;*/
+/*}*/
+
 
 
 
