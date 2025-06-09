@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/style.css}">
+
+  <title>Simple Checkout</title>
+</head>
+<body class="student">
+<header>
+  <!-- Logo and Nav -->
+  <div th:replace="~{fragments/nav-student :: nav}"></div>
+</header>
+<main>
+  <!-- Add Page Title and Content Here!-->
+  <h2> Simple Checkout</h2>
+
+  <div th:if="${error}" class="error" th:text="${error}"></div>
+  <div th:if="${success}" class="success" th:text="${success}"></div>
+
+
+  <form method="post" th:action="@{/students/simple-checkout/handle}">
+    <label>Student Username:</label>
+    <input type="text" name="username" th:value="${username}" readonly />
+
+
+
+
+    <label>Book Code (Simple ID):</label>
+    <input type="text" name="simpleId" required />
+
+
+    <button type="submit">Submit</button>
+
+
+
+
+  </form>
+
+
+
+
+
+</main>
+<footer>
+  <!-- Footer -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>
+
+
+

@@ -1,5 +1,6 @@
 package com.trafny.classroomlibrary.Repositories;
 
+import com.trafny.classroomlibrary.Entities.BookCopy;
 import com.trafny.classroomlibrary.Entities.Checkout;
 import com.trafny.classroomlibrary.Entities.Student;
 import com.trafny.classroomlibrary.Entities.User;
@@ -13,6 +14,9 @@ public interface CheckoutRepo extends JpaRepository<Checkout, Long> {
     List<Checkout> findByUserAndReturnDateIsNull(User user);
 
     List<Checkout> findByUserAndReturnDateIsNotNull(User user);
+
+    boolean existsByUserAndBookCopyAndReturnDateIsNull(User user, BookCopy bookCopy);
+
 
 
 }
