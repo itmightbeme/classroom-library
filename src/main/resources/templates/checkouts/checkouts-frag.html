@@ -1,35 +1,9 @@
-<!--<div th:fragment="checkouts">-->
-<!--    <h3>Current Checkouts</h3>-->
-<!--    <table class="bluetable">-->
-<!--        <tr>-->
-<!--            <th>Title</th>-->
-<!--            <th>Copy</th>-->
-<!--            <th>Checked Out</th>-->
-<!--            <th>Due Date</th>-->
-<!--            <th>Status</th>-->
-<!--            <th>Action</th>-->
-<!--        </tr>-->
-<!--        <tr th:each="checkout : ${checkouts}">-->
-<!--            <td th:text="${checkout.bookcopy.book.title}"></td>-->
-<!--            <td th:text="${checkout.bookcopy.simpleId}"></td>-->
-<!--            <td th:text="${checkout.checkoutDate}"></td>-->
-<!--            <td th:text="${checkout.dueDate}"></td>-->
-<!--            <td th:text="${checkout.returnDate != null ? 'Returned' : 'Out'}"></td>-->
-<!--            <td>-->
-<!--                <form method="post" th:action="@{/checkouts/return-by-id}">-->
-<!--                    <input type="hidden" name="checkoutId" th:value="${checkout.id}"/>-->
-<!--                    <button type="submit" th:disabled="${checkout.returnDate != null}">Return</button>-->
-<!--                </form>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
-
-<div th:fragment="checkouts (checkouts, showDays)">
+<div th:fragment="checkouts (checkouts, showDays, showStudentName)">
     <h3>Current Checkouts</h3>
     <table class="bluetable">
         <thead>
         <tr>
+            <th th:if="${showStudentName}">Student</th>
             <th>Title</th>
             <th>Copy</th>
             <th>Checked Out</th>
@@ -41,6 +15,7 @@
         </thead>
         <tbody>
         <tr th:each="checkout : ${checkouts}">
+            <td th:if="${showStudentName}" th:text="${checkout.user.name}">Student</td>
             <td th:text="${checkout.bookCopy.book.title}">Title</td>
             <td th:text="${checkout.bookCopy.simpleId}">Copy</td>
             <td th:text="${checkout.checkoutDate}">Checked</td>

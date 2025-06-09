@@ -15,7 +15,10 @@
     <!-- Add Page Title and Content Here!-->
     <h2> Student Dashboard</h2>
 
-    <div th:replace="~{checkouts/checkouts-frag :: checkouts (${checkouts}, true)} "></div>
+    <div th:replace="~{checkouts/checkouts-frag :: checkouts (${checkouts}, true, false)} "></div>
+
+    <div th:replace="~{checkouts/history-frag :: history(${completedCheckouts}, false)}"></div>
+
 
 
 

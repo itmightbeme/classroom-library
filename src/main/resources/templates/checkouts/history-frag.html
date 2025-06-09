@@ -1,0 +1,28 @@
+<div th:fragment="history (checkouts, showStudentName)">
+  <h3>Books You Finished This Year</h3>
+
+  <div th:if="${#lists.isEmpty(checkouts)}">
+    <p>No finished books found yet. Keep reading!</p>
+  </div>
+
+  <table class="bluetable" th:if="${!#lists.isEmpty(checkouts)}">
+    <thead>
+    <tr>
+      <th th:if="${showStudentName}">Student</th>
+      <th>Title</th>
+      <th>Copy ID</th>
+      <th>Checked Out</th>
+      <th>Returned</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="checkout : ${checkouts}">
+      <td th:if="${showStudentName}" th:text="${checkout.user.name}">Student</td>
+      <td th:text="${checkout.bookCopy.book.title}">Title</td>
+      <td th:text="${checkout.bookCopy.simpleId}">Copy</td>
+      <td th:text="${checkout.checkoutDate}">Out</td>
+      <td th:text="${checkout.returnDate}">Returned</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

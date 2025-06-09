@@ -34,9 +34,12 @@ public class StudentViewController {
         }
 
         List<Checkout> checkouts = checkoutRepo.findByUserAndReturnDateIsNull(student);
+        List<Checkout> completedCheckouts = checkoutRepo.findByUserAndReturnDateIsNotNull(student);
+
 
         model.addAttribute("student", student);
         model.addAttribute("checkouts", checkouts);
+        model.addAttribute("completedCheckouts", completedCheckouts);
         model.addAttribute("showDays", true);
 
         return "students/dashboard";
