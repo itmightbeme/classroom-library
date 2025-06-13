@@ -1,11 +1,11 @@
-<div th:fragment="bookGenres(book)">
+<div th:fragment="bookGenres(book)" class="genre-box">
   <h3>Genres for this Book</h3>
 
   <ul class="inner-table-list">
     <li th:each="genre : ${book.genres}">
       <span th:text="${genre.name}"></span>
       <form th:action="@{'/books/' + ${book.id} + '/genres/remove/' + ${genre.id}}" method="post" style="display:inline;">
-        <button type="submit" class="button danger" onclick="return confirm('Remove this genre from the book?')">✖</button>
+        <button type="submit" class="delete-icon-button" onclick="return confirm('Remove this genre from the book?')">&#128465;</button>
       </form>
     </li>
   </ul>

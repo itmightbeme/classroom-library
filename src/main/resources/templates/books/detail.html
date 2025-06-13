@@ -17,27 +17,20 @@
     <h2> Book Detail</h2>
     <p th:text="${book.title}">Book Title</p>
 
-    <div th:replace="~{books/fragments/book-info-frag :: bookForm}"></div>
+    <div class="book-detail-layout">
+        <div class="book-info-panel">
+            <div th:replace="~{books/fragments/book-info-frag :: bookForm}"></div>
+        </div>
 
-    <div th:replace="~{books/fragments/book-genre-frag :: bookGenres(book=${book})}"></div>
-    <div th:replace="~{books/fragments/book-topic-frag :: bookTopics(book=${book})}"></div>
+        <div class="sidebar-panel">
+            <div class="genre-box" th:replace="~{books/fragments/book-genre-frag :: bookGenres(book=${book})}"></div>
+            <div class="topic-box" th:replace="~{books/fragments/book-topic-frag :: bookTopics(book=${book})}"></div>
+        </div>
+    </div>
 
-
-
-
-
-
-
-
-
-    <div th:replace="~{books/fragments/bookcopy-info-frag :: copyList(book=${book})}"></div>
-
-
-
-
-
-
-
+    <div class="book-copies-panel">
+        <div th:replace="~{books/fragments/bookcopy-info-frag :: copyList(book=${book})}"></div>
+    </div>
 
 
 

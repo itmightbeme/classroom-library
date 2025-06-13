@@ -584,6 +584,85 @@ label {
 /*    text-align: center;*/
 /*}*/
 
+/* ===============================
+   📘 Book Detail Page Layout
+================================== */
+
+.book-detail-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.book-info-panel {
+    flex: 2;
+    min-width: 300px;
+    background-color: #f8f8ff;
+    padding: 1.5rem;
+    border: 1px solid var(--ltblue);
+    border-radius: 8px;
+}
+
+.sidebar-panel {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* spacing between genre and topic boxes */
+}
+
+.genre-box,
+.topic-box {
+    background-color: #f8f8ff;
+    padding: 1.5rem;
+    border: 1px solid var(--ltblue);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.book-copies-panel {
+    margin-top: 2rem;
+    background-color: #f8f8ff;
+    border: 1px solid var(--ltblue);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+/* ===============================
+   🗑 Genre & Topic Delete Styling (Scoped to genre/topic boxes)
+================================== */
+.genre-box form,
+.topic-box form {
+    display: inline;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.genre-box .delete-icon-button,
+.topic-box .delete-icon-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.genre-box .delete-icon-button:hover,
+.topic-box .delete-icon-button:hover {
+    color: var(--coral);
+}
+
+
+
+
+
+
+
 
 
 

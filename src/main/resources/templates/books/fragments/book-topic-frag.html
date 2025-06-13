@@ -1,11 +1,11 @@
-<div th:fragment="bookTopics(book)">
+<div th:fragment="bookTopics(book)" class="topic-box">
     <h3>Topics for this Book</h3>
 
     <ul class="inner-table-list">
         <li th:each="topic : ${book.topics}">
             <span th:text="${topic.name}"></span>
             <form th:action="@{'/books/' + ${book.id} + '/topics/remove/' + ${topic.id}}" method="post" style="display:inline;">
-                <button type="submit" class="button danger" onclick="return confirm('Remove this topic from the book?')">✖</button>
+                <button type="submit" class="delete-icon-button" onclick="return confirm('Remove this topic from the book?')">&#128465;</button>
             </form>
         </li>
     </ul>
