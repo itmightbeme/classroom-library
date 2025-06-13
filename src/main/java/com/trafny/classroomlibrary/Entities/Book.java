@@ -118,4 +118,12 @@ public class Book {
         this.description = description != null ? description.trim() : null;
 
     }
+
+    public List<BookCopy> getBookCopies() {
+        return bookCopies;
+    }
+
+    public void setBookCopies(List<BookCopy> bookCopies) {
+        this.bookCopies = bookCopies;
+    }
 }

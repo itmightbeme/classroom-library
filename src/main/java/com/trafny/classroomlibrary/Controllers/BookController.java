@@ -42,9 +42,6 @@ public class BookController {
         return "books/inventory";
     }
 
-    //new controllers
-
-
     @GetMapping("/detail/{id}")
     public String showBookDetail(@PathVariable Long id, Model model) {
         Book book = bookRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
