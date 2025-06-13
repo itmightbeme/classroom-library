@@ -1,0 +1,17 @@
+<div th:fragment="bookTopics(book)">
+    <h3>Topics for this Book</h3>
+
+    <ul class="inner-table-list">
+        <li th:each="topic : ${book.topics}">
+            <span th:text="${topic.name}"></span>
+            <form th:action="@{'/books/' + ${book.id} + '/topics/remove/' + ${topic.id}}" method="post" style="display:inline;">
+                <button type="submit" class="button danger" onclick="return confirm('Remove this topic from the book?')">✖</button>
+            </form>
+        </li>
+    </ul>
+
+    <form th:action="@{'/books/' + ${book.id} + '/topics/add'}" method="post" style="margin-top: 1em;">
+        <input type="text" name="topicName" placeholder="Enter topic name" required />
+        <button type="submit" class="btn-primary">&#x271A; Add Topic</button>
+    </form>
+</div>
