@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
+
 @Entity
 public class BookCopy {
 
@@ -11,7 +15,7 @@ public class BookCopy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne (optional = false)
+    @ManyToOne(optional = false)
     private Book book;
 
     @NotBlank(message = "SimpleID is required.")
@@ -22,6 +26,9 @@ public class BookCopy {
     private boolean available = true;
 
     private String location;
+
+    @OneToMany(mappedBy = "bookCopy", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Checkout> checkouts = new ArrayList<>();
 
 
     //Constructor
@@ -72,5 +79,14 @@ public class BookCopy {
     public void setLocation(String location) {
         this.location = location != null ? location.trim() : null;
 
+    }
+
+
+    public List<Checkout> getCheckouts() {
+        return checkouts;
+    }
+
+    public void setCheckouts(List<Checkout> checkouts) {
+        this.checkouts = checkouts;
     }
 }

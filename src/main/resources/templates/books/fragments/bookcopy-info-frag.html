@@ -1,5 +1,10 @@
 <div th:fragment="copyList(book)">
     <h3>Book Copies</h3>
+
+    <!-- Show global messages -->
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+    <div class="success" th:if="${success}" th:text="${success}"></div>
+
     <table class="bluetable">
         <thead>
         <tr>
@@ -11,22 +16,34 @@
         </thead>
         <tbody>
         <tr th:each="copy : ${book.bookCopies}">
-            <form th:action="@{'/books/copy/save/' + ${copy.id}}" method="post">
-                <td>
+            <!-- Simple ID -->
+            <td>
+                <form th:action="@{'/books/copy/save/' + ${copy.id}}" method="post">
                     <input type="text" name="simpleId" th:value="${copy.simpleId}" required />
-                </td>
-                <td th:text="${copy.available ? '✔' : '❌'}"></td>
-                <td>
-                    <input type="text" name="location" th:value="${copy.location}" />
-                </td>
-                <td>
-                    <button type="submit" class="btn-primary">Save</button>
-                    <a th:href="@{'/books/copy/delete/' + ${copy.id}}"
-                       onclick="return confirm('Are you sure you want to delete this book copy?');"
-                       class="button danger">Delete</a>
-                </td>
-            </form>
+            </td>
+
+            <!-- Availability Icon -->
+            <td th:text="${copy.available ? '✔' : '❌'}"></td>
+
+            <!-- Location -->
+            <td>
+                <input type="text" name="location" th:value="${copy.location}" />
+            </td>
+
+            <!-- Actions (Save + Delete) -->
+            <td>
+                <button type="submit" class="btn-primary">Save</button>
+                </form>
+
+                <form th:action="@{'/books/copy/delete/' + ${copy.id}}" method="post" style="display:inline;">
+                    <input type="hidden" name="confirmFallback" value="true" />
+                    <button type="submit" class="delete-icon-button" title="Delete"
+                            onclick="return confirm('This copy has checkout history. Mark it as unavailable instead?');">&#128465;</button>
+                </form>
+
+            </td>
         </tr>
+
         </tbody>
     </table>
 </div>
