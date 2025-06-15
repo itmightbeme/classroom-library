@@ -1,4 +1,4 @@
-<div th:fragment="checkouts (checkouts, showDays, showStudentName)">
+<div th:fragment="checkouts (checkouts, showDays, showStudentName, formAction)">
     <h3>Current Checkouts</h3>
     <table class="bluetable">
         <thead>
@@ -36,8 +36,8 @@
             </td>
 
             <td>
-                <form method="post" th:action="@{/checkouts/return-by-id}">
-                    <input type="hidden" name="checkoutId" th:value="${checkout.id}"/>
+                <form method="post" th:action="@{${formAction}}">
+                    <input type="hidden" name="checkoutId" th:value="${checkout.id}" />
                     <button type="submit"
                             class="button"
                             th:disabled="${checkout.returnDate != null}">

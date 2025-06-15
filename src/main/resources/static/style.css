@@ -658,6 +658,49 @@ label {
 }
 
 
+/*==================Teacher dashboard layout================*/
+.main-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    align-items: flex-start;
+}
+
+.left-column {
+    flex: 2;
+    min-width: 300px;
+}
+
+.right-column {
+    flex: 1;
+    min-width: 220px;
+}
+
+/* Optional: Scroll container for student list */
+.student-list-scroll {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid var(--ltblue);
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+}
+
+.full-height-actions {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: var(--teacher-background);
+    border-left: 1px solid var(--ltblue);
+    min-width: 180px;
+    max-width: 200px;
+}
+
+
+
+
 
 
 

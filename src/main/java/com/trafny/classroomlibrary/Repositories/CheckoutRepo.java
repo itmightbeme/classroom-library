@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CheckoutRepo extends JpaRepository<Checkout, Long> {
@@ -18,5 +19,10 @@ public interface CheckoutRepo extends JpaRepository<Checkout, Long> {
     boolean existsByUserAndBookCopyAndReturnDateIsNull(User user, BookCopy bookCopy);
 
 
+    int countByReturnDateIsNull();
+
+    int countByDueDateBeforeAndReturnDateIsNull(LocalDate date);
+
+    List<Checkout> findByReturnDateIsNull();
 
 }

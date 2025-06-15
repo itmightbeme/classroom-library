@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -14,11 +13,62 @@
 </header>
 <main>
     <!-- Add Page Title and Content Here!-->
-    <h2> Teacher Dashboard</h2>
+    <h1>Welcome to the Teacher Dashboard</h1>
+
+    <div class="dashboard-container">
 
 
+        <!-- 🧱 Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div class="left-column">
 
+                <!-- 📊 Stats Row -->
+                <div class="card-row">
+                    <div class="card">
+                        <h3>Books in Library</h3>
+                        <p th:text="${bookCount}">[bookCount]</p>
+                    </div>
+                    <div class="card">
+                        <h3>Students</h3>
+                        <p th:text="${studentCount}">[studentCount]</p>
+                    </div>
+                    <div class="card">
+                        <h3>Currently Checked Out</h3>
+                        <p th:text="${booksCheckedOutCount}">[checkedOutCount]</p>
+                    </div>
+                    <div class="card">
+                        <h3>Overdue Books</h3>
+                        <p th:text="${overdueCount}">[overdueCount]</p>
+                    </div>
+                </div>
 
+                <!-- 👥 Student List with Scroll -->
+                <h3>Student List</h3>
+                <div class="student-list-scroll">
+                    <div th:replace="~{fragments/class-list :: student-list(students=${students})}"></div>
+                </div>
+
+                <!-- 📚 Current Checkouts -->
+                <p> checkouts</p>
+                <div th:replace="~{checkouts/checkouts-frag :: checkouts(
+                    checkouts=${checkouts},
+                    showDays=${true},
+                    showStudentName=${true},
+                    formAction='/checkouts/return-by-id/teacher')}"></div>
+
+            </div>
+
+            <!-- Right Column: Actions -->
+            <div class="right-column full-height-actions">
+                <h3>Actions</h3>
+                <a class="action-button" th:href="@{/books/find}">Find Book by ID</a><br/>
+                <a class="action-button" th:href="@{/books}">Search for Books</a><br/>
+                <a class="action-button" th:href="@{/students/new}">Add Student</a><br/>
+                <a class="action-button" th:href="@{/books/new}">Add Book</a>
+            </div>
+        </div>
+    </div>
 </main>
 <footer>
     <!-- Footer -->

@@ -1,6 +1,9 @@
 package com.trafny.classroomlibrary.Controllers;
 
 import com.trafny.classroomlibrary.Entities.Teacher;
+import com.trafny.classroomlibrary.Repositories.BookRepo;
+import com.trafny.classroomlibrary.Repositories.CheckoutRepo;
+import com.trafny.classroomlibrary.Repositories.StudentRepo;
 import com.trafny.classroomlibrary.Repositories.TeacherRepo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
@@ -20,10 +24,32 @@ public class TeacherController {
     @Autowired
     private TeacherRepo teacherRepo;
 
+    @Autowired
+    private BookRepo bookRepo;
+
+    @Autowired
+    private CheckoutRepo checkoutRepo;
+
+    @Autowired
+    private StudentRepo studentRepo;
+
+
+
+
+
+
     @GetMapping("/dashboard")
-    public String showTeacherDashboard() {
+    public String showTeacherDashboard(Model model) {
+        model.addAttribute("bookCount", bookRepo.count());
+        model.addAttribute("studentCount", studentRepo.count());
+        model.addAttribute("booksCheckedOutCount", checkoutRepo.countByReturnDateIsNull());
+        model.addAttribute("overdueCount", checkoutRepo.countByDueDateBeforeAndReturnDateIsNull(LocalDate.now()));
+        model.addAttribute("students", studentRepo.findAll());
+        model.addAttribute("checkouts", checkoutRepo.findByReturnDateIsNull());
+
         return "teachers/dashboard";
     }
+
 
     @GetMapping("/account")
     public String viewAccount(Model model, Principal principal) {
