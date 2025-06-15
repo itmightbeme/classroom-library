@@ -81,6 +81,33 @@ public class CheckoutController {
         return "students/simple-checkout";
     }
 
+    @PostMapping("/checkouts/return-by-id")
+    public String returnBook(@RequestParam("checkoutId") Long checkoutId,
+                             RedirectAttributes redirectAttributes) {
+
+        Optional<Checkout> checkoutOpt = checkoutRepo.findById(checkoutId);
+        if (checkoutOpt.isPresent()) {
+            Checkout checkout = checkoutOpt.get();
+
+            // Mark the return date
+            checkout.setReturnDate(LocalDate.now());
+
+            // Mark book copy available again
+            BookCopy copy = checkout.getBookCopy();
+            copy.setAvailable(true);
+
+            checkoutRepo.save(checkout);
+            bookCopyRepo.save(copy);
+
+            redirectAttributes.addFlashAttribute("success", "Book returned successfully.");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Checkout record not found.");
+        }
+
+        return "redirect:/students/dashboard"; // or wherever you want to redirect
+    }
+
+
 
 
 }
