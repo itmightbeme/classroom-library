@@ -58,6 +58,8 @@ public class StudentViewController {
         model.addAttribute("checkouts", checkouts);
         model.addAttribute("completedCheckouts", completedCheckouts);
         model.addAttribute("showDays", true);
+        model.addAttribute("formAction", "/checkouts/return-by-id");
+
 
         return "students/dashboard";
     }

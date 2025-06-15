@@ -35,7 +35,11 @@
     </div>
 
 
-    <div th:replace="~{checkouts/checkouts-frag :: checkouts (${checkouts}, true, false)} "></div>
+    <div th:replace="~{checkouts/checkouts-frag :: checkouts(
+        checkouts=${checkouts},
+        showDays=${true},
+        showStudentName=${false},
+        formAction=${formAction})}"></div>
     <br><br>
 
     <div th:replace="~{checkouts/history-frag :: history(${completedCheckouts}, false)}"></div>
