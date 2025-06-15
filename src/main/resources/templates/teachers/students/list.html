@@ -17,27 +17,8 @@
   <h2>Student List</h2>
   <p class="timestamp" th:text="${timestamp}">Timestamp here</p>
 
-  <table class="bluetable">
-    <thead>
-    <tr>
-      <th>Student Name</th>
-      <th>Student ID</th>
-      <th>PIN</th>
-      <th>Reading Level</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="student : ${students}"
-        th:onclick="|window.location.href='@{/teachers/students/detail/{id}(id=${student.id})}'|"
-        style="cursor: pointer;">
+  <div th:replace="~{fragments/class-list :: student-list(students=${students})}"></div>
 
-      <td th:text="${student.name}">Name</td>
-      <td th:text="${student.studentId}">StudentID</td>
-      <td th:text="${student.pin}">PIN</td>
-      <td th:text="${student.readingLevel}">Level</td>
-    </tr>
-     </tbody>
-  </table>
   <div>
     <a th:href="@{/teachers/students/detail}" class="button btn-primary">&#x271A; Add Student</a>
   </div>

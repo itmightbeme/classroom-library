@@ -34,7 +34,7 @@ public class StudentController {
     }
 
     // Show form to add new student
-    @GetMapping("/detail")
+    @GetMapping("/add")
     public String showAddStudentForm(Model model) {
         model.addAttribute("student", new Student());
         return "teachers/students/detail";

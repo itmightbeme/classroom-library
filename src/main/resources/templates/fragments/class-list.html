@@ -1,0 +1,24 @@
+<div th:fragment="student-list(students)">
+    <table class="bluetable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Student ID</th>
+            <th>PIN</th>
+            <th>Reading Level</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}"
+            th:onclick="'window.location.href=\'/teachers/students/detail/' + ${student.id} + '\''"
+            style="cursor: pointer;">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.studentId}"></td>
+            <td>
+                <span class="masked-pin" th:text="${student.pin}"></span>
+            </td>
+            <td th:text="${student.readingLevel}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
