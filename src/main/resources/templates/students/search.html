@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/style.css}">
+
+  <title>Search</title>
+</head>
+<body class="student">
+<header>
+  <!-- Logo and Nav -->
+  <div th:replace="~{fragments/nav-student :: nav}"></div>
+</header>
+<main>
+  <!-- Add Page Title and Content Here!-->
+  <h2>Search Books</h2>
+  <form method="get" th:action="@{/students/search}">
+    <input type="text" name="query" th:value="${query}" placeholder="Search by title, author, or topic" required>
+    <input type="submit" value="Search">
+  </form>
+
+  <div th:if="${results}">
+    <h3 th:text="'Results for: ' + ${query}"></h3>
+    <table class="bluetable">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Simple ID</th>
+        <th>Available</th>
+        <th>Location</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="copy : ${results}">
+        <td th:text="${copy.book.title}"></td>
+        <td th:text="${copy.book.author}"></td>
+        <td th:text="${copy.simpleId}"></td>
+        <td th:text="${copy.available ? 'Yes' : 'No'}"></td>
+        <td th:text="${copy.location}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<footer>
+  <!-- Footer -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>
+
+
+
