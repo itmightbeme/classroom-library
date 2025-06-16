@@ -5,6 +5,7 @@ import com.trafny.classroomlibrary.Entities.Checkout;
 import com.trafny.classroomlibrary.Entities.Student;
 import com.trafny.classroomlibrary.Repositories.BookCopyRepo;
 import com.trafny.classroomlibrary.Repositories.CheckoutRepo;
+import com.trafny.classroomlibrary.Repositories.StudentRepo;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ public class CheckoutController {
     private BookCopyRepo bookCopyRepo;
     @Autowired
     private CheckoutRepo checkoutRepo;
+    @Autowired
+    private StudentRepo studentRepo;
 
     @GetMapping("/students/simple-checkout")
     public String showCheckoutForm(HttpSession session, Model model) {
@@ -129,6 +132,62 @@ public class CheckoutController {
 
         return "redirect:/teachers/dashboard";
     }
+
+    @GetMapping("teachers/students/checkout")
+    public String showTeacherCheckoutForm(Model model) {
+        model.addAttribute("students", studentRepo.findAll());
+        return "teachers/students/checkout";
+    }
+
+    @PostMapping("/teachers/students/checkout")
+    public String processTeacherCheckout(@RequestParam("studentId") Long studentId,
+                                         @RequestParam("simpleId") String simpleId,
+                                         RedirectAttributes redirectAttributes,
+                                         Model model) {
+        Optional<Student> studentOpt = studentRepo.findById(studentId);
+        if (studentOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Student not found.");
+            return "redirect:/teachers/students/checkout";
+        }
+
+        Student student = studentOpt.get();
+
+        Optional<BookCopy> copyOpt = bookCopyRepo.findBySimpleId(simpleId.trim().toUpperCase());
+        if (copyOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Book copy not found.");
+            return "redirect:/teachers/students/checkout";
+        }
+
+        BookCopy bookCopy = copyOpt.get();
+
+        if (!bookCopy.isAvailable()) {
+            redirectAttributes.addFlashAttribute("error", "That book is currently unavailable.");
+            return "redirect:/teachers/students/checkout";
+        }
+
+        if (checkoutRepo.existsByUserAndBookCopyAndReturnDateIsNull(student, bookCopy)) {
+            redirectAttributes.addFlashAttribute("error", "This student already has that book checked out.");
+            return "redirect:/teachers/students/checkout";
+        }
+
+        Checkout checkout = new Checkout();
+        checkout.setUser(student);
+        checkout.setBookCopy(bookCopy);
+        checkout.setCheckoutDate(LocalDate.now());
+        checkout.setDueDate(LocalDate.now().plusDays(14));
+
+        bookCopy.setAvailable(false);
+
+        checkoutRepo.save(checkout);
+        bookCopyRepo.save(bookCopy);
+
+        redirectAttributes.addFlashAttribute("success", "Book successfully checked out to " + student.getName() + "!");
+        return "redirect:/teachers/students/checkout";
+    }
+
+
+
+
 
 
 

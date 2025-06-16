@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <title>Book Checkout</title>
+</head>
+<body class="teacher">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+<main>
+    <!-- Add Page Title and Content Here!-->
+
+    <h2>Teacher Checkout</h2>
+
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${success}" class="success" th:text="${success}"></div>
+
+    <form method="post" th:action="@{/teachers/students/checkout}">
+        <label for="studentId">Select Student:</label>
+        <select name="studentId" required>
+            <option value="" disabled selected>Select a student</option>
+            <option th:each="student : ${students}"
+                    th:value="${student.id}"
+                    th:text="${student.name} + ' (' + ${student.studentId} + ')'">
+            </option>
+        </select>
+
+        <label for="simpleId">Book Code (Simple ID):</label>
+        <input type="text" name="simpleId" id="simpleId" required/>
+
+        <button type="submit" class="button submit">Submit</button>
+    </form>
+</main>
+
+
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>
