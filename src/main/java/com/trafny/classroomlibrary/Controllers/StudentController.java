@@ -1,6 +1,8 @@
 package com.trafny.classroomlibrary.Controllers;
 
+import com.trafny.classroomlibrary.Entities.Checkout;
 import com.trafny.classroomlibrary.Entities.Student;
+import com.trafny.classroomlibrary.Repositories.CheckoutRepo;
 import com.trafny.classroomlibrary.Repositories.StudentRepo;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,11 @@ import java.util.Optional;
 public class StudentController {
 
     private final StudentRepo studentRepo;
+    private final CheckoutRepo checkoutRepo;
 
-    public StudentController(StudentRepo studentRepo) {
+    public StudentController(StudentRepo studentRepo, CheckoutRepo checkoutRepo) {
         this.studentRepo = studentRepo;
+        this.checkoutRepo = checkoutRepo;
     }
 
     // List all students
@@ -47,25 +51,7 @@ public class StudentController {
         model.addAttribute("student", student);
         return "teachers/students/detail";
     }
-//    @PostMapping("/add")
-//    public String addStudent(
-//            @Valid @ModelAttribute("student") Student student,
-//            BindingResult bindingResult,
-//            Model model,
-//            RedirectAttributes redirectAttributes
-//    ) {
-//        if (studentRepo.findByStudentId(student.getStudentId()).isPresent()) {
-//            bindingResult.rejectValue("studentId", "error.student", "Student ID must be unique.");
-//        }
-//
-//        if (bindingResult.hasErrors()) {
-//            return "teachers/students/detail";
-//        }
-//
-//        studentRepo.save(student);
-//        redirectAttributes.addFlashAttribute("successMessage", "Student added successfully.");
-//        return "redirect:/teachers/students/list";
-//    }
+
 @PostMapping("/add")
 public String addStudent(
         @Valid @ModelAttribute("student") Student student,
@@ -122,30 +108,20 @@ public String addStudent(
     }
 
 
-
-
-
-
-
-
-
-
-
     // Delete student (used on detail page)
-    @PostMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        Optional<Student> studentOpt = studentRepo.findById(id);
+    @PostMapping("/delete")
+    public String deleteStudent(@RequestParam("id") Long studentId,
+                                RedirectAttributes redirectAttributes) {
+        Optional<Student> studentOpt = studentRepo.findById(studentId);
 
         if (studentOpt.isPresent()) {
-            Student student = studentOpt.get();
+            List<Checkout> checkouts = checkoutRepo.findByUserId(studentId);
+            if (!checkouts.isEmpty()) {
+                redirectAttributes.addFlashAttribute("error", "Cannot delete student. This student has checkout records.");
+                return "redirect:/teachers/students/detail/" + studentId;
+            }
 
-            // TODO: check if student has active checkouts (if you haven’t added this yet, just skip this block)
-            // if (hasOutstandingBooks(student)) {
-            //     redirectAttributes.addFlashAttribute("error", "Cannot delete: student has books checked out.");
-            //     return "redirect:/teachers/students/detail/" + id;
-            // }
-
-            studentRepo.delete(student);
+            studentRepo.deleteById(studentId);
             redirectAttributes.addFlashAttribute("success", "Student deleted successfully.");
         } else {
             redirectAttributes.addFlashAttribute("error", "Student not found.");
@@ -153,5 +129,7 @@ public String addStudent(
 
         return "redirect:/teachers/students/list";
     }
+
+
 }
 
