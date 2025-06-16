@@ -7,6 +7,7 @@ import com.trafny.classroomlibrary.Repositories.StudentRepo;
 import com.trafny.classroomlibrary.Repositories.TeacherRepo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,9 @@ public class TeacherController {
 
     @Autowired
     private StudentRepo studentRepo;
+
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
 
 
@@ -111,6 +115,8 @@ public class TeacherController {
         return "teachers/new-teacher-form";  // Your new template
     }
 
+
+
     @PostMapping("/account/new")
     public String addNewTeacher(
             @Valid @ModelAttribute("teacher") Teacher teacher,
@@ -126,13 +132,55 @@ public class TeacherController {
             return "teachers/new-teacher-form";
         }
 
-        // ⚠️ Hash the password before saving (add PasswordEncoder if using Spring Security)
-        // Example: teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
+        //Hash the password before saving.
+        teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
+
 
         teacherRepo.save(teacher);
         redirectAttributes.addFlashAttribute("successMessage", "New teacher added.");
         return "redirect:/teachers/account";
     }
+
+    @PostMapping("/account/change-password")
+    public String changePassword(@RequestParam String currentPassword,
+                                 @RequestParam String newPassword,
+                                 @RequestParam String confirmPassword,
+                                 Principal principal,
+                                 RedirectAttributes redirectAttributes) {
+        Optional<Teacher> teacherOpt = teacherRepo.findByUsername(principal.getName());
+
+        if (teacherOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Teacher not found.");
+            return "redirect:/teachers/account";
+        }
+
+        Teacher teacher = teacherOpt.get();
+
+        if (!passwordEncoder.matches(currentPassword, teacher.getPassword())) {
+            redirectAttributes.addFlashAttribute("error", "Current password is incorrect.");
+            return "redirect:/teachers/account";
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            redirectAttributes.addFlashAttribute("error", "New passwords do not match.");
+            return "redirect:/teachers/account";
+        }
+
+        // Update and encode new password
+        teacher.setPassword(passwordEncoder.encode(newPassword));
+        teacherRepo.save(teacher);
+
+        redirectAttributes.addFlashAttribute("success", "Password updated successfully.");
+        return "redirect:/teachers/account";
+    }
+
+
+
+
+
+
+
+
 
 
 }
