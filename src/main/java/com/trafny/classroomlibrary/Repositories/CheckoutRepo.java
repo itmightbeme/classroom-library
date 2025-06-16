@@ -25,4 +25,8 @@ public interface CheckoutRepo extends JpaRepository<Checkout, Long> {
 
     List<Checkout> findByReturnDateIsNull();
 
+
+    List<Checkout> findByReturnDateIsNullAndDueDateBefore(LocalDate date);
+
+
 }
