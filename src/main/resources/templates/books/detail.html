@@ -34,6 +34,22 @@
     <div class="book-copies-panel">
         <div th:replace="~{books/fragments/bookcopy-info-frag :: copyList(book=${book})}"></div>
     </div>
+    <div th:if="${book.id != null}">
+        <a th:href="@{'/books/detail/' + ${book.id} + '?showCopyForm=true'}"
+           class="button btn-primary">+ Add New Copy</a>
+    </div>
+    <div th:if="${showCopyForm}" class="form-field">
+        <h3>Add New Copy</h3>
+        <form th:action="@{'/books/' + ${book.id} + '/copy/add'}" method="post">
+            <label for="simpleId">Simple ID:</label>
+            <input type="text" id="simpleId" name="simpleId" required />
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" />
+
+            <button type="submit" class="button submit">Add Copy</button>
+        </form>
+    </div>
 
 </main>
 

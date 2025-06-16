@@ -45,11 +45,16 @@ public class BookController {
     }
 
     @GetMapping("/detail/{id}")
-    public String showBookDetail(@PathVariable Long id, Model model) {
-        Book book = bookRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
+    public String showBookDetail(@PathVariable Long id,
+                                 @RequestParam(value = "showCopyForm", required = false) Boolean showCopyForm,
+                                 Model model) {
+        Book book = bookRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
         model.addAttribute("book", book);
+        model.addAttribute("showCopyForm", showCopyForm != null && showCopyForm);
         return "books/detail";
     }
+
 
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
@@ -319,6 +324,8 @@ public class BookController {
         ra.addFlashAttribute("success", "New copy added.");
         return "redirect:/books/detail/" + id;
     }
+
+
 
 
 
