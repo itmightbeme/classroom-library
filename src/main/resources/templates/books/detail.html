@@ -12,6 +12,9 @@
     <!-- Logo and Nav -->
     <div th:replace="~{fragments/nav-teacher :: nav}"></div>
 </header>
+
+
+
 <main>
     <!-- Add Page Title and Content Here!-->
     <h2> Book Detail</h2>
@@ -32,10 +35,10 @@
         <div th:replace="~{books/fragments/bookcopy-info-frag :: copyList(book=${book})}"></div>
     </div>
 
-
-
-
 </main>
+
+
+
 <footer>
     <!-- Footer -->
     <div th:replace="~{fragments/footer :: footer}"></div>

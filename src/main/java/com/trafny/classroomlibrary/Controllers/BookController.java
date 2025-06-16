@@ -51,7 +51,6 @@ public class BookController {
         return "books/detail";
     }
 
-
     @GetMapping("/add")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
@@ -250,6 +249,80 @@ public class BookController {
         ra.addFlashAttribute("success", "Book copy deleted.");
         return "redirect:/books/detail/" + bookId;
     }
+
+    @PostMapping("/add")
+    public String saveNewBook(@ModelAttribute @Valid Book book,
+                              BindingResult result,
+                              @RequestParam String simpleId,
+                              @RequestParam(required = false) String location,
+                              RedirectAttributes ra,
+                              Model model) {
+
+        // Trim and uppercase the simpleId
+        String trimmedId = simpleId.trim().toUpperCase();
+
+        // Check if simpleId already exists
+        if (bookCopyRepo.findBySimpleId(trimmedId).isPresent()) {
+            ra.addFlashAttribute("error", "That Simple ID is already in use.");
+            model.addAttribute("book", book);
+            model.addAttribute("genres", genreRepo.findAll());
+            model.addAttribute("topics", topicRepo.findAll());
+            return "books/detail";
+        }
+
+        if (result.hasErrors()) {
+            ra.addFlashAttribute("error", "Please fix validation errors.");
+            model.addAttribute("genres", genreRepo.findAll());
+            model.addAttribute("topics", topicRepo.findAll());
+            return "books/detail";
+        }
+
+        // Save the book
+        Book savedBook = bookRepo.save(book);
+
+        // Create and save first copy
+        BookCopy copy = new BookCopy();
+        copy.setBook(savedBook);
+        copy.setSimpleId(trimmedId);
+        copy.setAvailable(true);
+        copy.setLocation(location != null ? location.trim() : "");
+
+        bookCopyRepo.save(copy);
+
+        ra.addFlashAttribute("success", "Book and first copy saved.");
+        return "redirect:/books/detail/" + savedBook.getId();
+    }
+
+
+    @PostMapping("/{id}/copy/add")
+    public String addCopyToExistingBook(@PathVariable Long id,
+                                        @RequestParam String simpleId,
+                                        @RequestParam(required = false) String location,
+                                        RedirectAttributes ra) {
+        Book book = bookRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
+
+        String trimmedId = simpleId.trim().toUpperCase();
+
+        if (bookCopyRepo.findBySimpleId(trimmedId).isPresent()) {
+            ra.addFlashAttribute("error", "That Simple ID is already in use.");
+            return "redirect:/books/detail/" + id;
+        }
+
+        BookCopy newCopy = new BookCopy();
+        newCopy.setBook(book);
+        newCopy.setSimpleId(trimmedId);
+        newCopy.setAvailable(true);
+        newCopy.setLocation(location != null ? location.trim() : "");
+
+        bookCopyRepo.save(newCopy);
+        ra.addFlashAttribute("success", "New copy added.");
+        return "redirect:/books/detail/" + id;
+    }
+
+
+
+
 
 
 

@@ -1,8 +1,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="bookForm">
-    <form th:action="${book.id != null} ? @{'/books/' + ${book.id}} : @{/books}"
-          th:object="${book}" method="post">
+    <form th:action="${book.id == null} ? @{/books/add} : @{'/books/' + ${book.id}}"
+          method="post"
+          th:object="${book}">
 
         <div style="display: flex; align-items: flex-start; gap: 2rem;">
 
@@ -34,6 +35,19 @@
                 <textarea th:field="*{description}" th:readonly="${readonlyMode}" rows="6" cols="50"></textarea>
                 <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             </div>
+<!--            show only on add new form-->
+            <div th:if="${book.id == null}">
+                <h3>Initial Book Copy</h3>
+                <div class="form-field">
+                    <label for="simpleId">Simple ID:</label>
+                    <input type="text" id="simpleId" name="simpleId" required />
+
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" />
+
+                    <button type="submit" class="button submit">Save Book and First Copy</button>
+                </div>
+            </div>
 
             <!-- Right: Book Cover -->
             <div class="book-cover-container">
@@ -42,10 +56,9 @@
         </div>
 
         <!-- Submit button -->
-        <div th:if="${readonlyMode == null or !readonlyMode}">
+        <div th:if="${(readonlyMode == null or !readonlyMode) and book.id != null}">
             <button type="submit" class="button submit">Save Book</button>
         </div>
-
     </form>
 </div>
 
