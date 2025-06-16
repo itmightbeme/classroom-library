@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <title>Reports</title>
+</head>
+<body class="teacher">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+<main>
+    <!-- Add Page Title and Content Here!-->
+    <h2>Reports</h2>
+
+    <main>
+        <h1>📊 Reports Dashboard</h1>
+        <p class="timestamp">Generated on: <span th:text="${#dates.format(#dates.createNow(), 'MMMM dd, yyyy HH:mm')}">Now</span></p>
+
+        <!-- Book-Centric Reports -->
+        <section>
+            <h2>📘 Book Reports</h2>
+            <ul>
+                <li><a th:href="@{/teachers/reports/all-books}">All Books & Status Report</a></li>
+                <li><a th:href="@{/teachers/reports/detailed-search}">Detailed Book Search</a></li>
+                <li><a th:href="@{/teachers/reports/overdue-books}">Overdue Books</a></li>
+                <li><a th:href="@{/teachers/reports/out-of-circulation}">Out of Circulation</a></li>
+                <li><a th:href="@{/teachers/reports/out-of-circulation}">Out of Circulation</a></li>
+            </ul>
+        </section>
+        <h2>📘 Book Reports</h2>
+        <ul>
+            <li><a th:href="@{/teachers/reports/all-books}">Book Topics</a></li>
+            <li><a th:href="@{/teachers/reports/detailed-search}">Book Genres</a></li>
+            <li><a th:href="@{/teachers/reports/overdue-books}">Overdue Books</a></li>
+            <li><a th:href="@{/teachers/reports/out-of-circulation}">Out of Circulation</a></li>
+        </ul>
+
+        <!-- Student-Centric Reports -->
+        <section>
+            <h2>👩‍🏫 Student Reports</h2>
+            <ul>
+                <li><a th:href="@{/teachers/reports/topic-interest}">Reading Match by Topic</a></li>
+                <li><a th:href="@{/teachers/reports/active-students}">Most Active Readers</a></li>
+                <li><a th:href="@{/teachers/reports/students-with-overdues}">Students with Overdue Books</a></li>
+            </ul>
+        </section>
+
+        <!-- Usage & Trends -->
+        <section>
+            <h2>📈 Trends & Insights</h2>
+            <ul>
+                <li><a th:href="@{/teachers/reports/popular-books}">Popular Books</a></li>
+                <li><a th:href="@{/teachers/reports/genre-trends}">Trending Topics & Genres</a></li>
+                <li><a th:href="@{/teachers/reports/never-checked-out}">Books Never Checked Out</a></li>
+            </ul>
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+</main>
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>

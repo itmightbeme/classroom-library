@@ -50,13 +50,14 @@
                 </div>
 
                 <!-- 📚 Current Checkouts -->
-                <p> checkouts</p>
-                <div th:replace="~{checkouts/checkouts-frag :: checkouts(
+                <h3> Checkouts</h3>
+                <div class="student-list-scroll">
+                    <div th:replace="~{checkouts/checkouts-frag :: checkouts(
                     checkouts=${checkouts},
                     showDays=${true},
                     showStudentName=${true},
                     formAction='/checkouts/return-by-id/teacher')}"></div>
-
+                </div>
             </div>
 
             <!-- Right Column: Actions -->

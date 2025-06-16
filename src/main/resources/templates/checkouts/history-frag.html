@@ -1,5 +1,4 @@
 <div th:fragment="history (checkouts, showStudentName)">
-  <h3>Books You Finished This Year</h3>
 
   <div th:if="${#lists.isEmpty(checkouts)}">
     <p>No finished books found yet. Keep reading!</p>

@@ -34,7 +34,7 @@
         </div>
     </div>
 
-
+    <h3>Current Checkouts</h3>
     <div th:replace="~{checkouts/checkouts-frag :: checkouts(
         checkouts=${checkouts},
         showDays=${true},
@@ -42,10 +42,9 @@
         formAction=${formAction})}"></div>
     <br><br>
 
+    <h3>Books You've read this Year</h3>
+
     <div th:replace="~{checkouts/history-frag :: history(${completedCheckouts}, false)}"></div>
-
-
-
 
 
 </main>

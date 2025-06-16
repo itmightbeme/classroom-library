@@ -686,6 +686,14 @@ label {
     margin-bottom: 1.5rem;
 }
 
+.student-list-scroll thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--berkeley-blue);
+    color: white;
+    z-index: 1;
+}
+
 .full-height-actions {
     align-self: stretch;
     display: flex;
