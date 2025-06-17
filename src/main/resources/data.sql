@@ -59,20 +59,20 @@ INSERT INTO book_topics (book_id, topic_id) VALUES
                                                      (10, 6);
 
 INSERT INTO book_copy (book_id, simple_id, available, location) VALUES
-                                                                    (1, 'CW01', true, 'Shelf A'),
-                                                                    (1, 'CW02', true, 'Shelf A'),
-                                                                    (2, 'GV01', true, 'Shelf B'),
-                                                                    (2, 'GV02', false, 'Shelf B'),
+                                                                    (1, 'CW01', false, 'Shelf A'),
+                                                                    (1, 'CW02', false, 'Shelf A'),
+                                                                    (2, 'GV01', false, 'Shelf B'),
+                                                                    (2, 'GV02', true, 'Shelf B'),
                                                                     (3, 'HL01', true, 'Shelf C'),
-                                                                    (4, 'IV01', true, 'Shelf C'),
+                                                                    (4, 'IV01', false, 'Shelf C'),
                                                                     (5, 'HP01', true, 'Shelf D'),
-                                                                    (5, 'HP02', true, 'Shelf D'),
+                                                                    (5, 'HP02', false, 'Shelf D'),
                                                                     (6, 'WD01', true, 'Shelf E'),
-                                                                    (7, 'WK01', true, 'Shelf E'),
+                                                                    (7, 'WK01', false, 'Shelf E'),
                                                                     (8, 'ER01', true, 'Shelf F'),
-                                                                    (9, 'ST01', true, 'Shelf G'),
+                                                                    (9, 'ST01', false, 'Shelf G'),
                                                                     (9, 'ST02', false, 'Shelf G'),
-                                                                    (10, 'DN01', true, 'Shelf G');
+                                                                    (10, 'DN01', false, 'Shelf G');
 
 INSERT INTO users (dtype, name, email, username, password, subject, class_grade, classroom, student_id, pin, reading_level) VALUES
                                                                                                                                     ('STUDENT', 'Liam Carter', 'liam.carter@example.com', NULL, NULL, NULL, NULL, NULL, 'LC01', '1234', 3.8),
@@ -94,11 +94,11 @@ INSERT INTO checkout (book_copy_id, user_id, checkout_date, due_date, return_dat
                                                                                        (1, 2, '2025-03-21', '2025-04-04', NULL),
                                                                                        (3, 2, '2025-04-06', '2025-04-20', NULL),
                                                                                        (5, 2, '2025-03-22', '2025-04-05', '2025-04-04'),
-                                                                                       (2, 2, '2025-05-11', '2025-05-25', NULL),
-                                                                                       (14, 2, '2025-04-16', '2025-04-30', NULL),
-                                                                                       (8, 3, '2025-05-18', '2025-06-01', NULL),
+                                                                                       (2, 2, '2025-05-11', '2025-05-25', '2025-05-16'),
+                                                                                       (14, 2, '2025-04-16', '2025-04-30', '2025-04-28'),
+                                                                                       (8, 3, '2025-05-18', '2025-06-01', '2025-05-27'),
                                                                                        (7, 3, '2025-04-27', '2025-05-11', '2025-04-28'),
-                                                                                       (14, 3, '2025-03-09', '2025-03-23', NULL),
+                                                                                       (14, 3, '2025-03-09', '2025-03-23', '2025-03-10'),
                                                                                        (7, 4, '2025-04-10', '2025-04-24', '2025-04-30'),
                                                                                        (6, 4, '2025-03-22', '2025-04-05', NULL),
                                                                                        (3, 4, '2025-04-24', '2025-05-08', '2025-05-12'),
@@ -107,6 +107,6 @@ INSERT INTO checkout (book_copy_id, user_id, checkout_date, due_date, return_dat
                                                                                        (13, 5, '2025-03-08', '2025-03-22', NULL),
                                                                                        (10, 6, '2025-05-03', '2025-05-17', NULL),
                                                                                        (4, 6, '2025-03-11', '2025-03-25', '2025-03-24'),
-                                                                                       (7, 6, '2025-03-10', '2025-03-24', NULL),
+                                                                                       (7, 6, '2025-03-10', '2025-03-24', '2025-03-18'),
                                                                                        (1, 6, '2025-05-04', '2025-05-18', '2025-05-24');
 
