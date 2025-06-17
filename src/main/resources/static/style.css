@@ -706,6 +706,65 @@ label {
     max-width: 200px;
 }
 
+/*============toggle switch on search page============*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px; height: 20px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px; width: 16px;
+    left: 2px; bottom: 2px;
+    background-color: white;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #2196F3;
+}
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/*/=========split search form into columns==========*/
+
+.form-halves {
+    display: flex;
+    gap: 40px; /* space between halves */
+}
+
+.form-half {
+    flex: 1;            /* both halves share available width */
+    min-width: 0;       /* prevent overflow */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;          /* space between fields vertically */
+}
+.form-field .form-field-search {
+    background-color: var(--ltyellow);
+    padding: 1.5em;
+    border-radius: 8px;
+    max-width: 900px;
+    margin-top: 1em;
+}
+
 
 
 

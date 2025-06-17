@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <title>Book Search</title>
+</head>
+<body class="teacher">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+
+
+<main>
+    <h2>Book Search</h2>
+
+    <form th:action="@{/teachers/reports/book-search}" method="get" class="form-box">
+        <div class="form-field form-field-search">
+            <div class="form-halves">
+                <div class="form-half">
+                    <!-- Left side fields: e.g., Title, Author -->
+
+                    <div class="field-group">
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" id="title"
+                               th:value="${title}" placeholder="Enter title"
+                               class="text-input"/>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="author">Author:</label>
+                        <input type="text" name="author" id="author"
+                               th:value="${author}" placeholder="Enter author"
+                               class="text-input"/>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="topicId">Topic:</label>
+                        <select name="topicId" id="topicId"
+                                th:value="${topicId}" class="text-input">
+                            <option value="">All Topics</option>
+                            <option th:each="topic : ${topics}"
+                                    th:value="${topic.id}"
+                                    th:text="${topic.name}"
+                                    th:selected="${topic.id} == ${topicId}">
+                            </option>
+                        </select>
+                    </div>
+
+
+                </div>
+                <div class="form-half">
+                    <!-- Right side fields: e.g., Topic, sliders, availability, sort -->
+                    <div class="field-group">
+                        <label>Reading Level:</label>
+                        <div class="slider-row">
+
+                            <!-- Min-level slider + output -->
+                            <div class="slider-item">
+                                <label for="minLevel">Min:</label>
+                                <input
+                                        type="range"
+                                        id="minLevel"
+                                        name="minLevel"
+                                        min="0"
+                                        max="12"
+                                        step="0.2"
+                                        th:value="${minLevel != null ? minLevel : 0}"
+                                        oninput="
+                                          this.nextElementSibling.value = this.value;
+                                          const maxEl = document.getElementById('maxLevel');
+                                          if (parseFloat(this.value) > parseFloat(maxEl.value)) {
+                                            maxEl.value = this.value;
+                                            maxEl.nextElementSibling.value = this.value;
+                                          }
+                                        "/>
+                                <output th:value="${minLevel != null ? minLevel : 0}">0</output>
+                            </div>
+
+                            <!-- Max-level slider + output -->
+                            <div class="slider-item">
+                                <label for="maxLevel">Max:</label>
+                                <input
+                                        type="range"
+                                        id="maxLevel"
+                                        name="maxLevel"
+                                        min="0"
+                                        max="12"
+                                        step="0.2"
+                                        th:value="${maxLevel != null ? maxLevel : 12}"
+                                        oninput="
+                                          this.nextElementSibling.value = this.value;
+                                          const minEl = document.getElementById('minLevel');
+                                          if (parseFloat(this.value) < parseFloat(minEl.value)) {
+                                            minEl.value = this.value;
+                                            minEl.nextElementSibling.value = this.value;
+                                          }
+                                        "/>
+                                <output th:value="${maxLevel != null ? maxLevel : 12}">12</output>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Availability:</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="availability" value="both"
+                                       th:checked="${availability == null or availability == 'both'}"/>
+                                Both
+                            </label>
+                            <label>
+                                <input type="radio" name="availability" value="available"
+                                       th:checked="${availability == 'available'}"/>
+                                Available
+                            </label>
+                            <label>
+                                <input type="radio" name="availability" value="unavailable"
+                                       th:checked="${availability == 'unavailable'}"/>
+                                Unavailable
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--            Sort by-->
+                    <div class="field-group">
+                        <label for="sortField">Sort by:</label>
+                        <select name="sortField" id="sortField" class="text-input"
+                                th:value="${sortField}">
+                            <option value="title" th:selected="${sortField=='title'}">Title</option>
+                            <option value="author" th:selected="${sortField=='author'}">Author</option>
+                            <option value="topic" th:selected="${sortField=='topic'}">Topic</option>
+                            <option value="readingLevel" th:selected="${sortField=='readingLevel'}">Reading Level
+                            </option>
+                        </select>
+
+                        <span class="sort-label">Sort order:  A → Z</span>
+
+                        <label class="switch">
+                            <input type="checkbox" name="sortDesc" th:checked="${sortDesc}">
+                            <span class="slider round"></span>
+                        </label>
+
+                        <span class="sort-text">Z → A</span>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="button btn-primary">Search</button>
+    </form>
+    <br>
+    <hr>
+    <br><br>
+
+
+
+    <!--    Results-->
+    <div th:if="${results != null}">
+        <h2 th:text="${reportTitle}">Your Report Title</h2>
+        <p class="timestamp">
+            Generated on:
+            <span th:text="${#temporals.format(timestamp, 'MMMM dd, yyyy hh:mm a')}">June 16, 2025 04:00 PM</span>
+        </p>
+        <p class="timestamp"
+           th:text="'Found ' + ${#lists.size(results)} + ' copies.'">
+            0 available copies.
+        </p>
+
+        <table class="bluetable">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Reading Level</th>
+                <th>Simple ID</th>
+                <th>Available</th>
+                <th>Location</th>
+                <th>Topics</th>
+                <th>Genres</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="copy : ${results}"
+                style="cursor: pointer;"
+                th:onclick="'window.location.href=\'/books/detail/' + ${copy.book.id} + '\';'">
+                <td th:text="${copy.book.title}">Title</td>
+                <td th:text="${copy.book.author}">Author</td>
+                <td th:text="${copy.book.readingLevel}">0.0</td>
+                <td th:text="${copy.simpleId}">ID</td>
+                <td th:text="${copy.available ? 'Yes' : 'No'}">Yes</td>
+                <td th:text="${copy.location}">Location</td>
+                <td>
+                    <ul class="inner-table-list">
+                        <li th:each="t : ${copy.book.topics}" th:text="${t.name}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul class="inner-table-list">
+                        <li th:each="g : ${copy.book.genres}" th:text="${g.name}"></li>
+                    </ul>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>

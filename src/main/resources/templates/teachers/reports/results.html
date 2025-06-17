@@ -21,9 +21,7 @@
         <p class="timestamp">Generated on: <span th:text="${#temporals.format(timestamp, 'MMMM dd, yyyy hh:mm a')}">Now</span></p>
 
         <div th:switch="${reportType}">
-<!--            <div th:case="'allBooks'" th:replace="~{fragments/reports/all-books :: tableFragment}"></div>-->
             <div th:case="'overdueBooks'" th:replace="~{checkouts/checkouts-frag :: checkouts(${checkouts}, true, true, '/checkouts/return-by-id')}"></div>
-<!--            <div th:case="'topicInterest'" th:replace="~{fragments/reports/topic-interest :: tableFragment}"></div>-->
         </div>
 
         <div th:case="*">No report selected.</div>

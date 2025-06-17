@@ -25,4 +25,23 @@ public interface BookCopyRepo extends JpaRepository<BookCopy, Long> {
 """)
     List<BookCopy> searchAvailableCopiesByTitleAuthorOrTopic(@Param("query") String query);
 
+    @Query("""
+SELECT bc FROM BookCopy bc
+JOIN bc.book b
+LEFT JOIN b.topics t
+WHERE (LOWER(b.title) LIKE %:query%
+   OR LOWER(b.author) LIKE %:query%
+   OR LOWER(t.name) LIKE %:query%)
+  AND (bc.location IS NULL OR LOWER(bc.location) <> 'out of circulation')
+""")
+    List<BookCopy> searchCopiesByTitleAuthorOrTopic(@Param("query") String query);
+
+
+
+
+
+
+
+
+
 }
