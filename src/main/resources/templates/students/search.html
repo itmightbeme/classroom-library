@@ -32,7 +32,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="copy : ${results}">
+      <tr th:each="copy : ${results}"
+          th:onclick="'location.href=\'/students/book-details/' + ${copy.book.id} + '\';'"
+          style="cursor: pointer;">
         <td th:text="${copy.book.title}"></td>
         <td th:text="${copy.book.author}"></td>
         <td th:text="${copy.simpleId}"></td>

@@ -1,9 +1,11 @@
 package com.trafny.classroomlibrary.Controllers;
 
+import com.trafny.classroomlibrary.Entities.Book;
 import com.trafny.classroomlibrary.Entities.BookCopy;
 import com.trafny.classroomlibrary.Entities.Checkout;
 import com.trafny.classroomlibrary.Entities.Student;
 import com.trafny.classroomlibrary.Repositories.BookCopyRepo;
+import com.trafny.classroomlibrary.Repositories.BookRepo;
 import com.trafny.classroomlibrary.Repositories.CheckoutRepo;
 import com.trafny.classroomlibrary.Repositories.StudentRepo;
 import jakarta.servlet.http.HttpSession;
@@ -11,13 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/students")
@@ -31,6 +32,9 @@ public class StudentViewController {
 
     @Autowired
     private BookCopyRepo bookCopyRepo;
+
+    @Autowired
+    private BookRepo bookRepo;
 
     @GetMapping("/dashboard")
     public String showStudentDashboard(HttpSession session, Model model) {
@@ -82,6 +86,19 @@ public class StudentViewController {
         model.addAttribute("query", query);
         return "students/search";
     }
+
+    @GetMapping("/book-details/{id}")
+    public String showStudentBookDetails(@PathVariable Long id, Model model) {
+        Book book = bookRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid book ID: " + id));
+        model.addAttribute("book", book);
+        model.addAttribute("showActionColumn", false);
+        model.addAttribute("readonlyMode", true);
+        return "students/book-details";
+    }
+
+
+
 
 
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+
+    <style th:if="${readonlyMode}">
+        /* hide the 5th column (action) in bluetable */
+        .bluetable th:nth-child(4),
+        .bluetable td:nth-child(4) {
+            display: none;
+        }
+        /* disable pointer events and row click (if any) */
+        .bluetable tr {
+            pointer-events: none;
+        }
+    </style>
+
+   <title>Book Details</title>
+</head>
+<body class="student">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-student :: nav}"></div>
+</header>
+
+
+
+<main>
+    <h2 th:text="${book.title}">Book Title</h2>
+
+    <div class="book-detail-layout">
+        <div class="book-info-panel">
+            <div th:replace="~{books/fragments/book-info-frag :: bookForm}"></div>
+        </div>
+
+        <div class="sidebar-panel">
+            <div class="genre-box">
+                <h3>Genres</h3>
+                <ul class="inner-table-list">
+                    <li th:each="genre : ${book.genres}" th:text="${genre.name}"></li>
+                </ul>
+            </div>
+
+            <div class="topic-box">
+                <h3>Topics</h3>
+                <ul class="inner-table-list">
+                    <li th:each="topic : ${book.topics}" th:text="${topic.name}"></li>
+                </ul>
+            </div>
+            <div class="book-copies-panel">
+                <div th:replace="~{books/fragments/bookcopy-info-frag :: copyList(book=${book})}"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+
+
+
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>
+
+
+
