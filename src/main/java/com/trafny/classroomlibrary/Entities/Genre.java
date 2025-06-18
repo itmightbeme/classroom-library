@@ -19,8 +19,10 @@ public class Genre {
     public Genre() {
     }
 
-
-    //Getters & Setters
+    public Genre(String name) {
+        this.name = name;
+    }
+//Getters & Setters
 
 
     public Long getId() {

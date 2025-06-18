@@ -14,12 +14,11 @@ public class Student extends User{
 
      @NotBlank
      @Pattern(regexp = "^[A-Z]{2}[0-9]{2}$", message = "Student ID must be 2 uppercase letters followed by 2 digits")
-     @Column(unique = true, nullable = false)
+     @Column(unique = true)
      private String studentId;
 
      @NotBlank(message = "PIN is required.")
      @Pattern(regexp = "\\d{4}", message = "PIN must be exactly 4 digits")
-     @Column(nullable = false)
      private String pin;
 
      @Min(0)
@@ -29,8 +28,15 @@ public class Student extends User{
      //Constructor
 
      public Student() {
+          super();
      }
 
+     public Student(String name, String email, String studentId, String pin, double readingLevel) {
+          super(name, email);
+          this.studentId = studentId;
+          this.pin = pin;
+          this.readingLevel = readingLevel;
+     }
 
      //Getters and Setters
 

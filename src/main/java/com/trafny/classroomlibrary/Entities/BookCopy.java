@@ -36,6 +36,12 @@ public class BookCopy {
     public BookCopy() {
     }
 
+    public BookCopy(Book book, String simpleId, boolean available, String location) {
+        this.book = book;
+        this.simpleId = simpleId;
+        this.available = available;
+        this.location = location;
+    }
 
     //Getters & Setters
 

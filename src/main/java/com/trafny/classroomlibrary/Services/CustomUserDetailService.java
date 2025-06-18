@@ -19,12 +19,9 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("Looking up teacher: " + username);  // TEMP debug
+        System.out.println("🚨 Inside loadUserByUsername with: " + username);
 
-
-
-
-        Teacher teacher = teacherRepo.findByUsername(username)
+    Teacher teacher = teacherRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Teacher not found"));
 
         System.out.println("DB hash: " + teacher.getPassword());

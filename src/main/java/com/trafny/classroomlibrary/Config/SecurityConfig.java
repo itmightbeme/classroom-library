@@ -2,6 +2,7 @@ package com.trafny.classroomlibrary.Config;
 
 import com.trafny.classroomlibrary.Repositories.TeacherRepo;
 import com.trafny.classroomlibrary.Services.CustomUserDetailService;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +20,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-
+    @PostConstruct
+    public void debugUserDetailsService() {
+        System.out.println("✅ UserDetailsService in use: " + userDetailsService.getClass());
+    }
 
 
     @Bean
@@ -55,6 +61,8 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 
 
 }

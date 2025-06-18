@@ -18,6 +18,10 @@ public class Topic {
     public Topic() {
     }
 
+    public Topic(String name) {
+        this.name = name;
+    }
+
     //Getters and Setters
 
 

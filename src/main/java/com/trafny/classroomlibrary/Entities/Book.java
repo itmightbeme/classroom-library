@@ -50,7 +50,13 @@ public class Book {
     public Book() {
     }
 
-
+    public Book(String title, String author, String isbn, double readingLevel, String description) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.readingLevel = readingLevel;
+        this.description = description;
+    }
     //Getters & Setters
 
 

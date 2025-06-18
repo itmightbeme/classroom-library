@@ -32,7 +32,13 @@ public class Checkout {
     public Checkout() {
     }
 
-
+    public Checkout(User user, BookCopy bookCopy, LocalDate checkoutDate, LocalDate dueDate, LocalDate returnDate) {
+        this.user = user;
+        this.bookCopy = bookCopy;
+        this.checkoutDate = checkoutDate;
+        this.dueDate = dueDate;
+        this.returnDate = returnDate;
+    }
     //Getters & Setters
 
 

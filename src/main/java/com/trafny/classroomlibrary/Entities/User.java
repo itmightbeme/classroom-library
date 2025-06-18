@@ -21,8 +21,15 @@ public abstract class User {
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$",
             message = "Email must be valid.")
     private String email;
+    // Constructor
+    public User() {}
 
-// Getters and Setters
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters and Setters
 
 
     public Long getId() {

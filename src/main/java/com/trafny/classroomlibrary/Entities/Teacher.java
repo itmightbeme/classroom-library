@@ -10,11 +10,10 @@ import jakarta.validation.constraints.NotBlank;
 public class Teacher extends User {
 
     @NotBlank(message = "Username is required.")
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String username;
 
     @NotBlank(message = "Password is required.")
-    @Column(nullable = false)
     private String password;
 
     private String subject;
@@ -25,8 +24,17 @@ public class Teacher extends User {
     //Constructor
 
     public Teacher() {
+        super();
     }
 
+    public Teacher(String name, String email, String username, String password, String subject, String classGrade, String classroom) {
+        super(name, email);
+        this.username = username;
+        this.password = password;
+        this.subject = subject;
+        this.classGrade = classGrade;
+        this.classroom = classroom;
+    }
 
     //Getters and Setters
 
