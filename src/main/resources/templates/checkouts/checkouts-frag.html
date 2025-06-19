@@ -38,7 +38,7 @@
                 <form method="post" th:action="@{${formAction}}">
                     <input type="hidden" name="checkoutId" th:value="${checkout.id}" />
                     <button type="submit"
-                            class="button"
+                            class="btn-primary"
                             th:disabled="${checkout.returnDate != null}">
                         Return
                     </button>

@@ -368,7 +368,7 @@ label {
 
 .btn-primary {
     display: inline-block;
-    margin-top: 16px;
+    margin-top: 4px;
     padding: 8px 16px;
     background-color: var(--berkeley-blue); /* matches table header */
     color: white;
