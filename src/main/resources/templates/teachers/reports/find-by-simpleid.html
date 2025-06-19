@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <title>Find Book</title>
+</head>
+<body class="teacher">
+<header>
+    <!-- Logo and Nav -->
+    <div th:replace="~{fragments/nav-teacher :: nav}"></div>
+</header>
+<main>
+    <!-- Add Page Title and Content Here!-->
+    <h2>Find Book by Simple Id</h2>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+
+    <form th:action="@{/teachers/reports/process-simpleid}" method="get" class="form-field">
+            <label for="simpleId">Find Book by Simple ID:</label>
+            <input type="text" id="simpleId" name="simpleId" placeholder="e.g. HP01"
+                   required pattern="[A-Z]{2}[0-9]{2}">
+            <input type="submit" value="Go to Book Details">
+        </form>
+
+
+
+</main>
+<footer>
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</footer>
+</body>
+</html>

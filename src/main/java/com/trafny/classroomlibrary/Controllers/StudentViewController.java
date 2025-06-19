@@ -80,7 +80,7 @@ public class StudentViewController {
     @GetMapping("/search")
     public String showSearchForm(@RequestParam(value = "query", required = false) String query, Model model) {
         if (query != null && !query.isBlank()) {
-            List<BookCopy> results = bookCopyRepo.searchAvailableCopiesByTitleAuthorOrTopic(query.trim().toLowerCase());
+            List<BookCopy> results = bookCopyRepo.searchCopiesByTitleAuthorOrTopic(query.trim().toLowerCase());
             model.addAttribute("results", results);
         }
         model.addAttribute("query", query);

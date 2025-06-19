@@ -1,10 +1,8 @@
 package com.trafny.classroomlibrary.Controllers;
 
+import com.trafny.classroomlibrary.Entities.BookCopy;
 import com.trafny.classroomlibrary.Entities.Teacher;
-import com.trafny.classroomlibrary.Repositories.BookRepo;
-import com.trafny.classroomlibrary.Repositories.CheckoutRepo;
-import com.trafny.classroomlibrary.Repositories.StudentRepo;
-import com.trafny.classroomlibrary.Repositories.TeacherRepo;
+import com.trafny.classroomlibrary.Repositories.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +25,9 @@ public class TeacherController {
 
     @Autowired
     private BookRepo bookRepo;
+
+    @Autowired
+    private BookCopyRepo bookCopyRepo;
 
     @Autowired
     private CheckoutRepo checkoutRepo;
@@ -173,6 +174,26 @@ public class TeacherController {
         redirectAttributes.addFlashAttribute("success", "Password updated successfully.");
         return "redirect:/teachers/account";
     }
+
+    @GetMapping("/reports/find-by-simpleid")
+    public String showFindBySimpleIdForm() {
+        return "teachers/reports/find-by-simpleid";  // You can include the fragment here
+    }
+
+    @GetMapping("/reports/process-simpleid")
+    public String processSimpleIdLookup(@RequestParam String simpleId,
+                                        RedirectAttributes redirectAttributes) {
+        Optional<BookCopy> copyOpt = bookCopyRepo.findBySimpleIdIgnoreCase(simpleId.trim());
+
+        if (copyOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "No book found for Simple ID: " + simpleId);
+            return "redirect:/teachers/reports/find-by-simpleid";
+        }
+
+        Long bookId = copyOpt.get().getBook().getId();
+        return "redirect:/books/detail/" + bookId;
+    }
+
 
 
 

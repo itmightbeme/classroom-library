@@ -37,11 +37,5 @@ WHERE (LOWER(b.title) LIKE %:query%
     List<BookCopy> searchCopiesByTitleAuthorOrTopic(@Param("query") String query);
 
 
-
-
-
-
-
-
-
+    Optional<BookCopy> findBySimpleIdIgnoreCase(String trim);
 }
