@@ -32,7 +32,7 @@ public class Book {
     @ManyToMany
     @JoinTable(name="book_topics", joinColumns = @JoinColumn(name="book_id"), inverseJoinColumns = @JoinColumn(name="topic_id"))
     private Set<Topic> topics = new HashSet<>();
-    @Pattern(regexp = "^(\\d{10}|\\d{13})$", message = "ISBN must be 10 or 13 digits")
+    @Pattern(regexp = "^$|^(\\d{10}|\\d{13})$", message = "ISBN must be 10 or 13 digits or blank")
     private String isbn;
 
     @Min(0)
