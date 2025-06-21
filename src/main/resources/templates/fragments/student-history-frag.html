@@ -1,0 +1,42 @@
+<div th:fragment="readingHistory(checkouts)">
+    <h3>Reading History</h3>
+    <p class="timestamp">
+        Report generated: <span th:text="${#temporals.format(T(java.time.LocalDateTime).now(), 'MMMM dd, yyyy hh:mm a')}">Now</span>
+    </p>
+    <table class="bluetable">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Reading Level</th>
+            <th>Checked Out</th>
+            <th>Date Completed</th>
+            <th>Days Held</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="checkout : ${checkouts}">
+            <td th:text="${checkout.bookCopy.book.title}">Book Title</td>
+            <td th:text="${checkout.bookCopy.book.readingLevel != null ? checkout.bookCopy.book.readingLevel : 'N/A'}">Level</td>
+            <td th:text="${checkout.checkoutDate != null ? #temporals.format(checkout.checkoutDate, 'MMM dd, yyyy') : 'N/A'}">Checkout Date</td>
+
+
+            <td th:text="${checkout.returnDate != null ? #temporals.format(checkout.returnDate, 'MMM dd, yyyy')
+                  : (checkout.dueDate.isBefore(T(java.time.LocalDate).now()) ? 'Overdue' : 'Out')}">
+                Return Status
+            </td>
+
+            <td th:text="${checkout.returnDate != null
+    ? T(java.time.temporal.ChronoUnit).DAYS.between(checkout.checkoutDate, checkout.returnDate)
+    : T(java.time.temporal.ChronoUnit).DAYS.between(checkout.checkoutDate, T(java.time.LocalDate).now())}">
+                Days Held
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 1em;">
+        <p>Total books read: <span th:text="${totalRead}">0</span></p>
+        <p>Average reading level: <span th:text="${#numbers.formatDecimal(avgReadingLevel, 1, 1)}">0.0</span></p>
+
+    </div>
+</div>

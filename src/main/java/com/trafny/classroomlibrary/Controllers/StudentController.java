@@ -44,13 +44,13 @@ public class StudentController {
         return "teachers/students/detail";
     }
 
-    @GetMapping("/detail/{id}")
-    public String showEditStudentForm(@PathVariable Long id, Model model) {
-        Student student = studentRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid student ID: " + id));
-        model.addAttribute("student", student);
-        return "teachers/students/detail";
-    }
+//    @GetMapping("/detail/{id}")
+//    public String showEditStudentForm(@PathVariable Long id, Model model) {
+//        Student student = studentRepo.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid student ID: " + id));
+//        model.addAttribute("student", student);
+//        return "teachers/students/detail";}
+
 
 @PostMapping("/add")
 public String addStudent(
@@ -130,6 +130,37 @@ public String addStudent(
         return "redirect:/teachers/students/list";
     }
 
+    //Show student reading history
+    @GetMapping("/detail/{id}")
+    public String showEditStudentForm(@PathVariable Long id, Model model) {
+        Student student = studentRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid student ID: " + id));
+
+        List<Checkout> checkouts = checkoutRepo.findByUserId(id);
+
+        // Calculate total books read (returned)
+        long totalRead = checkouts.stream()
+                .filter(c -> c.getReturnDate() != null)
+                .count();
+
+        // Calculate average reading level from returned books
+        double avgReading = checkouts.stream()
+                .filter(c -> c.getReturnDate() != null)
+                .mapToDouble(c -> c.getBookCopy().getBook().getReadingLevel())
+                .average()
+                .orElse(0.0);
+
+        model.addAttribute("student", student);
+        model.addAttribute("checkouts", checkouts);
+        model.addAttribute("totalRead", totalRead);
+        model.addAttribute("avgReadingLevel", avgReading);
+
+        return "teachers/students/detail";
+    }
 
 }
+
+
+
+
 

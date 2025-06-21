@@ -36,7 +36,7 @@
                 <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             </div>
 <!--            show only on add new form-->
-            <div th:if="${book.id == null}">
+            <div th:if="${book.id == null}" style="flex: 1;">
                 <h3>Initial Book Copy</h3>
                 <div class="form-field">
                     <label for="simpleId">Simple ID:</label>
