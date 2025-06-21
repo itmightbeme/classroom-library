@@ -203,13 +203,20 @@ public class DataInitializer implements ApplicationRunner {
         //Constructor: public Teacher(String name, String email, String username, String password, String subject, String classGrade, String classroom)
         String hashedPassword = passwordEncoder.encode("password123");
         String hashedPassword2 = passwordEncoder.encode("trouble");
+        String hashedPassword3 = passwordEncoder.encode("password123");
+
+
 
 
         Teacher teacher1 = new Teacher("Ms. Anderson", "anderson@example.com", "anderson", hashedPassword, "Reading", "3rd", "Room 12");
         Teacher teacher2 = new Teacher("Mr. Bennett", "bennett@example.com", "bennett", hashedPassword2, "Science", "4th", "Room 15");
+        Teacher teacher3 = new Teacher("Admin", "admin@example.com", "admin", hashedPassword3, "n/a", "n/a", "n/a");
+
 
         teacherRepo.save(teacher1);
         teacherRepo.save(teacher2);
+        teacherRepo.save(teacher3);
+
 
 
         //Checkouts
