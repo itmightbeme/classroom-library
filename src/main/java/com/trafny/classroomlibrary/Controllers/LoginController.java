@@ -39,9 +39,11 @@ public class LoginController {
                                       @RequestParam("pin") String pin,
                                       HttpSession session) {
 
+        studentId = studentId.trim().toUpperCase();
+
         Optional<Student> studentOpt = studentRepo.findByStudentIdAndPin(studentId, pin);
-// for debugging only
-        System.out.println("Login attempt: " + studentId + " / " + pin);
+        // for debugging only
+        // System.out.println("Login attempt: " + studentId + " / " + pin);
         studentRepo.findAll().forEach(s -> {
             System.out.println(s.getStudentId() + " / " + s.getPin());
         });

@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/render-deploy/
+/out/
+/src/main/resources/META-INF/MANIFEST.MF
+/data/classroomlibrary.trace.db
+/data/classroomlibrary.mv.db
