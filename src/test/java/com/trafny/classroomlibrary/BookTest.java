@@ -44,14 +44,29 @@ public class BookTest {
     }
 
     @Test
-    void testInvalidBookTitleThrowsConstraintViolationError() {
+    void testInvalidAuthorThrowsConstraintViolationError() {
         Book book = new Book();
-        book.setTitle(""); // Invalid
-        book.setAuthor("E.B. White");
+        book.setTitle("The Rainbow Fish");
+        book.setAuthor("");// Invalid
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertFalse(violations.isEmpty());
     }
+
+    @Test
+    void testBlankAuthorFailsValidation() {
+        Book book = new Book();
+        book.setTitle("The Rainbow Fish");
+        book.setAuthor("");// Invalid
+
+        Set<ConstraintViolation<Book>> violations = validator.validate(book);
+        assertFalse(violations.isEmpty(), "Book with blank author should fail");
+    }
+
+
+
+
+
 
 
 }

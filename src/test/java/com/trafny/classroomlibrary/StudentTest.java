@@ -70,4 +70,35 @@ public class StudentTest {
                         .toString().equals("studentId"));
         assertTrue(hasStudentIdViolation, "Validation should catch incorrect studentId");
     }
+
+    @Test
+    void testBlankNameFailsValidation() {
+        Student student = new Student();
+        student.setName("");//Invalid
+        student.setEmail("studentb@test.com");
+        student.setPin("1234");
+        student.setStudentId("ST99");
+
+        Set<ConstraintViolation<Student>> violations = validator.validate(student);
+        assertFalse(violations.isEmpty(), "Student with blank name should fail");
+    }
+
+    @Test
+    void testInvalidAuthorThrowsConstraintViolationError() {
+        Student student = new Student();
+        student.setName("");//Invalid
+        student.setEmail("studentb@test.com");
+        student.setPin("1234");
+        student.setStudentId("ST99");
+
+        Set<ConstraintViolation<Student>> violations = validator.validate(student);
+        assertFalse(violations.isEmpty());
+    }
+
+
+
+
+
+
+
 }
