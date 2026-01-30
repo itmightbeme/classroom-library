@@ -36,3 +36,4 @@ build/
 /src/main/resources/META-INF/MANIFEST.MF
 /data/classroomlibrary.trace.db
 /data/classroomlibrary.mv.db
+deploy-files/
